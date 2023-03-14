@@ -205,7 +205,7 @@ function CheckCity(target){
 }
 
 
-
+//only letters (hebrew and english) **check only one language**
 function CheckNameChars(target){
     for(let i = 0; i <target.value.length; i++){
     if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && CheckHebrewLetters(target.value[i]) == false){
@@ -216,8 +216,10 @@ function CheckNameChars(target){
       target.classList.remove('border-red');
     } 
 
-    return true; // after all unapproved characters are removed
-}}
+    
+  }
+  return true; // after all unapproved characters are removed
+}
 
 // deletes extra @ chars and hebrew chars:
 function CheckEmailChars(target){
