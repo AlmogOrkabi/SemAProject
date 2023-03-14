@@ -221,6 +221,8 @@ function CheckNameChars(target){
   return true; // after all unapproved characters are removed
 }
 
+
+//###DELETES EVERYTHING AFTER THE 2ND @###
 // deletes extra @ chars and hebrew chars:
 function CheckEmailChars(target){
   let atChar = false;
@@ -228,6 +230,7 @@ function CheckEmailChars(target){
     if(target.value[i] == '@' || CheckHebrewLetters(target.value[i])){
       if(target.value[i] == '@' && atChar == false){atChar = true;
       }
+      //if hebrew or more than one @, deletes it
       else{
         target.value = target.value.slice(0,i);
       }
@@ -236,7 +239,7 @@ function CheckEmailChars(target){
 }
 
 function CheckEmailValidity(target){
-  CheckEmailChars(target); //making sure there's no extra @
+  CheckEmailChars(target); //making sure there's no extra @ 
   if(target.value.endsWith('.com')){
     target.classList.remove('border-red');
     return true;
@@ -244,10 +247,11 @@ function CheckEmailValidity(target){
   else{
     target.classList.add('border-red');
     alert("כתובת המייל יכולה להסתיים רק ב: '.com'")
+    // #add a designed warning to the user#
   }
 }
 
-
+// checks that the street name is in hebrew without deleting spaces
 function CheckInputLanguage(target){
     for (let i = 0; i < target.value.length; i++) {
       if (target.value[i] < 'א' && target.value[i] != ' '|| target.value[i] > 'ת' && target.value[i] != ' '){
@@ -291,7 +295,7 @@ function CheckStreetNumber(target){
       console.log("valid form")
       RegisterNewUser();
     }
-    // add an eles which shows what is wrong with the form inputs to the user!!!
+    //### add an eles which shows what is wrong with the form inputs to the user!!! ###
   }
 
     function RegisterNewUser(){
@@ -308,7 +312,6 @@ function CheckStreetNumber(target){
         "streetNumber": streetNumrRef.current.value
       }
       console.log(newUser);
-      console.log(newUser.email);
       if(FindUser(newUser.email) == undefined){
         console.log("New user added successfully")
         AddNewUser(newUser);
@@ -316,6 +319,7 @@ function CheckStreetNumber(target){
       }
       else{
         console.log("user already exists")
+        //## message to the user about the email ##!!!!
       }
   }
 

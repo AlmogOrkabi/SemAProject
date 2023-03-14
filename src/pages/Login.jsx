@@ -1,6 +1,23 @@
 import React from 'react'
+import { useRef,useEffect, useContext } from 'react'
+import { UserContext } from '../contexts/UserContext.jsx';
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
+
+
+  const {users,Login} = useContext(UserContext);
+
+  const navigation = useNavigate();
+
+
+  useEffect(() => {
+  
+  },[]);
+
+  const usernameRef = useRef();
+  const passwordRef = useRef();
+
 
 
   const CheckHebrewLetters = (ch) => {
@@ -51,51 +68,38 @@ export default function Login() {
 }
 
 
-  //checks all password requirements
-function CheckPasswordValidity(target){
 
-  CheckPasswordChars(target) // another check for password chars
-  let isValidPassword;
-  let number = false, capitalLetter= false, symbol = false;
 
-  for(let i = 0; i < target.value.length; i++){
-    if(checkCapitalLetters(target.value[i]) == true){
-      capitalLetter = true;
-    }
-    else if(checkNumbers(target.value[i]) == true){
-      number = true;
-    }
-    else if(checkSymbols(target.value[i]) == true){
-      symbol = true;
-    }
-  }
 
+//deletes unapproved chars
+function CheckPasswordChars(target){
+    for(let i = 0; i <target.value.length; i++){
+    if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && checkNumbers(target.value[i]) == false && checkSymbols(target.value[i]) == false){
+      target.value = target.value.slice(0,i);
+      target.classList.add('border-red');
+    }
+    else{
+      target.classList.remove('border-red');
+
+    } 
   
-  if(number == true && capitalLetter == true && symbol == true && target.value.length > 6 && target.value.length < 13){
-    target.classList.add('border-green');
-    target.classList.remove('border-red');
-    isValidPassword = true;
   }
-  else{
-    target.classList.remove('border-green') // incase the user inserted a good password and then deleted chars (onKeyUp ignores backspace and delete keys)
-    target.classList.add('border-red');
-    isValidPassword = false;
-  }
-
-  return isValidPassword;
-
 }
+
+
 
 
   const UserLogin = (event) => {
   event.preventDefault(); 
-  let user = Login(username,password);
+  let user = Login(usernameRef.current.value,passwordRef.current.value);
   if (user != undefined){
-    alert(`Welcome Back ${user.name}`);
-    navigation(`/profile/${user.id}`) 
+    //delete before submitting
+    alert(`Welcome Back ${user.username}`);
+    navigation(`/profile/${user.username}`) 
   }
   else{
     alert('User Not Found');
+    //??add a popup or something to go to the register page??
   }
 }
   
@@ -106,11 +110,11 @@ function CheckPasswordValidity(target){
     <h1>Login Page</h1>
         <form onSubmit={UserLogin}>
         <label htmlFor='user-login'>שם משתמש:</label>
-        <input type="text" id='user-login' onChange={(event) => SetUsername(event.target.value)} />
+        <input type="text" id='user-login' ref={usernameRef} required   maxLength={60}  onKeyUp={(event) => CheckUserNameInput(event.target)} />
         
 
         <label htmlFor='user-password'>סיסמה:</label>
-        <input type="password" id='user-password' onChange={(event) => SetPassword(event.target.value)} />
+        <input ref={passwordRef} type="password" id='user-password' title='בין 7 ל 12 תווים, לפחות אות גדולה אחת, תו מיוחד ומספר' minLength={7} maxLength={12} onKeyUp={(e) => CheckPasswordChars(e.target)} required />
         <button>התחבר/י</button>
     </form>
     </>

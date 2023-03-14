@@ -7,14 +7,24 @@ import { UserContext } from '../contexts/UserContext'
 
 
 export default function Profile() {
+    const {users} = useContext(UserContext);
 
 
+    useEffect(() => {
+        console.log("Profile");
+        
+    },[])
+
+    const {username} = useParams();
+
+    console.log(username);
+    console.log(users)
 
 
 
 return (
 <>
-<h1>Profile Page</h1>
+<h1>Welcome Back {users.find((u) => u.username == username).username}</h1>
 </>  
 )
 }
