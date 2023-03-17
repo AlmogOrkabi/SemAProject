@@ -5,12 +5,15 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Register() {
 
-const {AddNewUser,users,FindUser} = useContext(UserContext)
+//const {AddNewUser,users,FindUser} = useContext(UserContext)
+
+const {FindUser,AddNewUser,CheckUserNameInput,CalcAge,CheckPasswordChars,CheckPasswordValidity,CheckRePassword,CheckUserAge,CheckCity,CheckNameChars,CheckEmailChars,CheckEmailValidity,CheckInputLanguage,CheckStreetNumber,LoadCities,cities} = useContext(UserContext)
 
 const navigation = useNavigate();
 
 useEffect(() => {
-  LoadCities()
+  LoadCities();
+
 },[]);
 
 
@@ -18,7 +21,7 @@ useEffect(() => {
 
 
 
-const [cities,SetCities] = useState([]);
+//const [cities,SetCities] = useState([]);
 
 
 const usernameRef = useRef();
@@ -39,249 +42,249 @@ const streetNumrRef = useRef();
 
 
 
-const CheckHebrewLetters = (ch) => {
-  return ch >= 'א'&& ch <= 'ת'
-}
+// const CheckHebrewLetters = (ch) => {
+//   return ch >= 'א'&& ch <= 'ת'
+// }
 
-const  checkLetters = (ch) => {
+// const  checkLetters = (ch) => {
 
-  return ch >= 'a' && ch <= 'z';
-}
+//   return ch >= 'a' && ch <= 'z';
+// }
 
-const checkCapitalLetters = (ch) => {
+// const checkCapitalLetters = (ch) => {
 
-  return ch >= 'A' && ch <= 'Z';
-}
+//   return ch >= 'A' && ch <= 'Z';
+// }
 
-const checkNumbers = (ch) => {
-  return ch >= '0' && ch <= '9';
-}
+// const checkNumbers = (ch) => {
+//   return ch >= '0' && ch <= '9';
+// }
 
-const checkSymbols = (ch) => {
-  //[!@#$%^&*+`~'=?\|\]\[\(\)\-<>/]
-
-
-  return ch == '!' || ch == '@' || ch == '$' || ch == '#' || ch == '%' || ch == '+' || ch == '-' || ch == '^' || ch == '&' || ch == '*' || ch == '`' || ch == '~' || ch == '=' || ch == '<' || ch == '>' || ch  == '/' || ch == '(\)' || ch == '_' || ch == '|' || ch == '.' || ch == "'";
-}
+// const checkSymbols = (ch) => {
+//   //[!@#$%^&*+`~'=?\|\]\[\(\)\-<>/]
 
 
-const CalcAge = (value) =>{
-
-  let today = new Date(); // current date - recieved by the browser
-  let userBday = new Date(value.value) // user input birth date
-  let userAge = today.getFullYear() - userBday.getFullYear(); // rough calculation of age 
-  let currentMonth = today.getMonth();
-  let currentDay = today.getDate(); //gets the day of the month 
-
-  if( today.getMonth() - userBday.getMonth() < 0 || today.getMonth() - userBday.getMonth() == 0 && today.getDate() < userBday.getDate()){
-    userAge--;
-  }
-  console.log(userAge)
-
-}
-
-function CheckUserNameInput(target){
-  for(let i = 0; i <target.value.length; i++){
-    if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && checkNumbers(target.value[i]) == false && checkSymbols(target.value[i]) == false){
-      target.value = target.value.slice(0,i);
-      target.classList.add('border-red');
-    }
-    else{
-      target.classList.remove('border-red');
-    }
-
-  }
-
-  if(target.value.length <= 0 || target.value.length > 60){
-    //add an error message to the user for invalid input length
-    return false
-  }
-  else{
-    return true; //all chars not allowed have been deleted and the username length is valid
-  }
-}
+//   return ch == '!' || ch == '@' || ch == '$' || ch == '#' || ch == '%' || ch == '+' || ch == '-' || ch == '^' || ch == '&' || ch == '*' || ch == '`' || ch == '~' || ch == '=' || ch == '<' || ch == '>' || ch  == '/' || ch == '(\)' || ch == '_' || ch == '|' || ch == '.' || ch == "'";
+// }
 
 
-//deletes unapproved chars
-function CheckPasswordChars(target){
-    for(let i = 0; i <target.value.length; i++){
-    if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && checkNumbers(target.value[i]) == false && checkSymbols(target.value[i]) == false){
-      target.value = target.value.slice(0,i);
-      target.classList.add('border-red');
-    }
-    else{
-      target.classList.remove('border-red');
+// const CalcAge = (value) =>{
 
-    } 
+//   let today = new Date(); // current date - recieved by the browser
+//   let userBday = new Date(value.value) // user input birth date
+//   let userAge = today.getFullYear() - userBday.getFullYear(); // rough calculation of age 
+//   let currentMonth = today.getMonth();
+//   let currentDay = today.getDate(); //gets the day of the month 
+
+//   if( today.getMonth() - userBday.getMonth() < 0 || today.getMonth() - userBday.getMonth() == 0 && today.getDate() < userBday.getDate()){
+//     userAge--;
+//   }
+//   console.log(userAge)
+
+// }
+
+// function CheckUserNameInput(target){
+//   for(let i = 0; i <target.value.length; i++){
+//     if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && checkNumbers(target.value[i]) == false && checkSymbols(target.value[i]) == false){
+//       target.value = target.value.slice(0,i);
+//       target.classList.add('border-red');
+//     }
+//     else{
+//       target.classList.remove('border-red');
+//     }
+
+//   }
+
+//   if(target.value.length <= 0 || target.value.length > 60){
+//     //add an error message to the user for invalid input length
+//     return false
+//   }
+//   else{
+//     return true; //all chars not allowed have been deleted and the username length is valid
+//   }
+// }
+
+
+// //deletes unapproved chars
+// function CheckPasswordChars(target){
+//     for(let i = 0; i <target.value.length; i++){
+//     if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && checkNumbers(target.value[i]) == false && checkSymbols(target.value[i]) == false){
+//       target.value = target.value.slice(0,i);
+//       target.classList.add('border-red');
+//     }
+//     else{
+//       target.classList.remove('border-red');
+
+//     } 
   
-  }
-}
+//   }
+// }
 
 
-//checks all password requirements
-function CheckPasswordValidity(target){
+// //checks all password requirements
+// function CheckPasswordValidity(target){
 
-  CheckPasswordChars(target) // another check for password chars
-  let isValidPassword;
-  let number = false, capitalLetter= false, symbol = false;
+//   CheckPasswordChars(target) // another check for password chars
+//   let isValidPassword;
+//   let number = false, capitalLetter= false, symbol = false;
 
-  for(let i = 0; i < target.value.length; i++){
-    if(checkCapitalLetters(target.value[i]) == true){
-      capitalLetter = true;
-    }
-    else if(checkNumbers(target.value[i]) == true){
-      number = true;
-    }
-    else if(checkSymbols(target.value[i]) == true){
-      symbol = true;
-    }
-  }
+//   for(let i = 0; i < target.value.length; i++){
+//     if(checkCapitalLetters(target.value[i]) == true){
+//       capitalLetter = true;
+//     }
+//     else if(checkNumbers(target.value[i]) == true){
+//       number = true;
+//     }
+//     else if(checkSymbols(target.value[i]) == true){
+//       symbol = true;
+//     }
+//   }
 
   
-  if(number == true && capitalLetter == true && symbol == true && target.value.length > 6 && target.value.length < 13){
-    target.classList.add('border-green');
-    target.classList.remove('border-red');
-    isValidPassword = true;
-  }
-  else{
-    target.classList.remove('border-green') // incase the user inserted a good password and then deleted chars (onKeyUp ignores backspace and delete keys)
-    target.classList.add('border-red');
-    isValidPassword = false;
-  }
+//   if(number == true && capitalLetter == true && symbol == true && target.value.length > 6 && target.value.length < 13){
+//     target.classList.add('border-green');
+//     target.classList.remove('border-red');
+//     isValidPassword = true;
+//   }
+//   else{
+//     target.classList.remove('border-green') // incase the user inserted a good password and then deleted chars (onKeyUp ignores backspace and delete keys)
+//     target.classList.add('border-red');
+//     isValidPassword = false;
+//   }
   
-  if(rePasswordRef.current.value != ''){
-    CheckRePassword(rePasswordRef.current) // visual check for the input border
-  }
+//   if(rePasswordRef.current.value != ''){
+//     CheckRePassword(rePasswordRef.current) // visual check for the input border
+//   }
 
-  return isValidPassword;
+//   return isValidPassword;
 
-}
+// }
 
-//checks if the passwords match:
-function CheckRePassword(target){
+// //checks if the passwords match:
+// function CheckRePassword(target){
 
-  if(target.value == '') return false;
+//   if(target.value == '') return false;
 
-  if(target.value != passwordRef.current.value){
-    console.log("passwords do not match");
-    target.classList.add('border-red');
-    target.classList.remove('border-green');
-    return false;
-  }
-  else{
-    console.log("passwords match");
-    target.classList.add('border-green');
-    target.classList.remove('border-red');
-    return true;
-  }
-}
+//   if(target.value != passwordRef.current.value){
+//     console.log("passwords do not match");
+//     target.classList.add('border-red');
+//     target.classList.remove('border-green');
+//     return false;
+//   }
+//   else{
+//     console.log("passwords match");
+//     target.classList.add('border-green');
+//     target.classList.remove('border-red');
+//     return true;
+//   }
+// }
 
-function CheckUserAge(target){
-  console.log("check age")
-  let age = CalcAge(target);
-    if( age >= 120 || age <= 0 || age == NaN){
-      return false;
-    }
-    else{
-      return true;
-    }
-}
-
-
-//checks if the city exists in the cities database (text input, the user can enter a fictional place)
-function CheckCity(target){
-  let city = target.value;
-  console.log(city)
-
-  for(let i = 0; i < cities.length; i++){
-    if(cities[i].שם_ישוב == city){
-      console.log("City FOUND")
-      return true
-    }
-  }
-  console.log("City NOT FOUND")
-  //@#add a message to the user that the city does not exist#@
-  return false;
-}
+// function CheckUserAge(target){
+//   console.log("check age")
+//   let age = CalcAge(target);
+//     if( age >= 120 || age <= 0 || age == NaN){
+//       return false;
+//     }
+//     else{
+//       return true;
+//     }
+// }
 
 
-//only letters (hebrew and english) **check only one language**
-function CheckNameChars(target){
-    for(let i = 0; i <target.value.length; i++){
-    if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && CheckHebrewLetters(target.value[i]) == false){
-      target.value = target.value.slice(0,i);
-      target.classList.add('border-red');
-    }
-    else{
-      target.classList.remove('border-red');
-    } 
+// //checks if the city exists in the cities database (text input, the user can enter a fictional place)
+// function CheckCity(target){
+//   let city = target.value;
+//   console.log(city)
+
+//   for(let i = 0; i < cities.length; i++){
+//     if(cities[i].שם_ישוב == city){
+//       console.log("City FOUND")
+//       return true
+//     }
+//   }
+//   console.log("City NOT FOUND")
+//   //@#add a message to the user that the city does not exist#@
+//   return false;
+// }
+
+
+// //only letters (hebrew and english) **check only one language**
+// function CheckNameChars(target){
+//     for(let i = 0; i <target.value.length; i++){
+//     if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && CheckHebrewLetters(target.value[i]) == false){
+//       target.value = target.value.slice(0,i);
+//       target.classList.add('border-red');
+//     }
+//     else{
+//       target.classList.remove('border-red');
+//     } 
 
     
-  }
-  return true; // after all unapproved characters are removed
-}
+//   }
+//   return true; // after all unapproved characters are removed
+// }
 
 
-//###DELETES EVERYTHING AFTER THE 2ND @###
-// deletes extra @ chars and hebrew chars:
-function CheckEmailChars(target){
-  let atChar = false;
-  for(let i = 0; i < target.value.length; i++){
-    if(target.value[i] == '@' || CheckHebrewLetters(target.value[i])){
-      if(target.value[i] == '@' && atChar == false){atChar = true;
-      }
-      //if hebrew or more than one @, deletes it
-      else{
-        target.value = target.value.slice(0,i);
-      }
-    }
-  }
-}
+// //###DELETES EVERYTHING AFTER THE 2ND @###
+// // deletes extra @ chars and hebrew chars:
+// function CheckEmailChars(target){
+//   let atChar = false;
+//   for(let i = 0; i < target.value.length; i++){
+//     if(target.value[i] == '@' || CheckHebrewLetters(target.value[i])){
+//       if(target.value[i] == '@' && atChar == false){atChar = true;
+//       }
+//       //if hebrew or more than one @, deletes it
+//       else{
+//         target.value = target.value.slice(0,i);
+//       }
+//     }
+//   }
+// }
 
-function CheckEmailValidity(target){
-  CheckEmailChars(target); //making sure there's no extra @ 
-  if(target.value.endsWith('.com')){
-    target.classList.remove('border-red');
-    return true;
-  }
-  else{
-    target.classList.add('border-red');
-    alert("כתובת המייל יכולה להסתיים רק ב: '.com'")
-    // #add a designed warning to the user#
-  }
-}
+// function CheckEmailValidity(target){
+//   CheckEmailChars(target); //making sure there's no extra @ 
+//   if(target.value.endsWith('.com')){
+//     target.classList.remove('border-red');
+//     return true;
+//   }
+//   else{
+//     target.classList.add('border-red');
+//     alert("כתובת המייל יכולה להסתיים רק ב: '.com'")
+//     // #add a designed warning to the user#
+//   }
+// }
 
-// checks that the street name is in hebrew without deleting spaces
-function CheckInputLanguage(target){
-    for (let i = 0; i < target.value.length; i++) {
-      if (target.value[i] < 'א' && target.value[i] != ' '|| target.value[i] > 'ת' && target.value[i] != ' '){
-        target.value = target.value.slice(0,i);
-        target.classList.add('border-red');
-       // alert('רק אותיות בעברית')
-      }
-      else{
-        target.classList.remove('border-red');
-      }
+// // checks that the street name is in hebrew without deleting spaces
+// function CheckInputLanguage(target){
+//     for (let i = 0; i < target.value.length; i++) {
+//       if (target.value[i] < 'א' && target.value[i] != ' '|| target.value[i] > 'ת' && target.value[i] != ' '){
+//         target.value = target.value.slice(0,i);
+//         target.classList.add('border-red');
+//        // alert('רק אותיות בעברית')
+//       }
+//       else{
+//         target.classList.remove('border-red');
+//       }
 
-      return true; // after the invalid chars have been removed from the input
-  }
-}
+//       return true; // after the invalid chars have been removed from the input
+//   }
+// }
 
-function CheckStreetNumber(target){
-  for(let i = 0; i < target.value.length; i++) {
-    if(checkNumbers(target.value[i]) == false){
-        target.value = target.value.slice(0,i);
-    }
-  }
-  if(target.value < 0 || target.value  == ''){
-    target.classList.add('border-red');
-    return false;
-  }
-  else{
-    target.classList.remove('border-red');
-    return true;
-  }
-}
+// function CheckStreetNumber(target){
+//   for(let i = 0; i < target.value.length; i++) {
+//     if(checkNumbers(target.value[i]) == false){
+//         target.value = target.value.slice(0,i);
+//     }
+//   }
+//   if(target.value < 0 || target.value  == ''){
+//     target.classList.add('border-red');
+//     return false;
+//   }
+//   else{
+//     target.classList.remove('border-red');
+//     return true;
+//   }
+// }
 
 
   //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -291,7 +294,7 @@ function CheckStreetNumber(target){
   function CheckFormOnSubmition(e){
     console.log("CheckFormOnSubmition")
     e.preventDefault();
-    if(CheckUserNameInput(usernameRef.current) && CheckPasswordValidity(passwordRef.current) && CheckRePassword(rePasswordRef.current) && CheckNameChars(firstnameRef.current) && CheckNameChars(lastnameRef.current) && CheckEmailValidity(emailRef.current) && CheckUserAge(bdateRef.current)&&CheckCity(cityRef.current) &&CheckInputLanguage(streetRef.current) && CheckStreetNumber(streetNumrRef.current)){
+    if(CheckUserNameInput(usernameRef.current) && CheckPasswordValidity(passwordRef.current,rePasswordRef.current) && CheckRePassword(rePasswordRef.current,passwordRef.current) && CheckNameChars(firstnameRef.current) && CheckNameChars(lastnameRef.current) && CheckEmailValidity(emailRef.current) && CheckUserAge(bdateRef.current)&&CheckCity(cityRef.current) &&CheckInputLanguage(streetRef.current) && CheckStreetNumber(streetNumrRef.current)){
       console.log("valid form")
       RegisterNewUser();
     }
@@ -325,26 +328,21 @@ function CheckStreetNumber(target){
 
 
 
-async function LoadCities(){
-  try {
-    let res = await fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=5c78e9fa-c2e2-4771-93ff-7f400a12f7ba&limit=1567`);
-    // without limit will only get the first 100 cities (out of 1267)
-    let data = await res.json();
-    console.log(data)
-    data = data.result.records
-    console.log(data)
-    SetCities(data)
-    console.log(cities)
-  } catch (error) {
-    console.error(error);
-  }
+// async function LoadCities(){
+//   try {
+//     let res = await fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=5c78e9fa-c2e2-4771-93ff-7f400a12f7ba&limit=1567`);
+//     // without limit will only get the first 100 cities (out of 1267)
+//     let data = await res.json();
+//     console.log(data)
+//     data = data.result.records
+//     console.log(data)
+//     SetCities(data)
+//     console.log(cities)
+//   } catch (error) {
+//     console.error(error);
+//   }
 
-
-
-
-
-
-}
+// }
 
   return (
     <>
@@ -359,10 +357,10 @@ async function LoadCities(){
 
         <label htmlFor="register-password">סיסמה:</label>
         {/* pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*?[!@#$%^&*+`~'=?\|\_]\[\(\)\-<>/]).{7,12}" */}
-        <input type="password" name="password" id="register-password" ref={passwordRef} title='בין 7 ל 12 תווים, לפחות אות גדולה אחת, תו מיוחד ומספר' minLength={7} maxLength={12} onKeyUp={(e) => CheckPasswordChars(e.target)}   onBlur={(e) => CheckPasswordValidity(e.target)} required />
+        <input type="password" name="password" id="register-password" ref={passwordRef} title='בין 7 ל 12 תווים, לפחות אות גדולה אחת, תו מיוחד ומספר' minLength={7} maxLength={12} onKeyUp={(e) => CheckPasswordChars(e.target)}   onBlur={(e) => CheckPasswordValidity(e.target,rePasswordRef.current)} required />
 
         <label htmlFor="register-password-confirmation">אימות סיסמה:</label>
-        <input type="password" name="password" id="register-password-confirmation" ref={rePasswordRef} title='בין 7 ל 12 תווים, לפחות אות גדולה אחת, תו מיוחד ומספר' minLength={7} maxLength={12} onKeyUp={(e) => CheckPasswordChars(e.target)} onBlur = {(e) => CheckRePassword(e.target)} required />
+        <input type="password" name="password" id="register-password-confirmation" ref={rePasswordRef} title='בין 7 ל 12 תווים, לפחות אות גדולה אחת, תו מיוחד ומספר' minLength={7} maxLength={12} onKeyUp={(e) => CheckPasswordChars(e.target)} onBlur = {(e) => CheckRePassword(e.target,passwordRef.current)} required />
 
         <label htmlFor="register-image">תמונה:</label>
         <input type="file" name="user-image" id="register-image" accept='image/jpeg, image/jpg' ref={imageRef} required />
