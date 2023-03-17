@@ -23,6 +23,7 @@ useEffect(() => {
 
 //const [cities,SetCities] = useState([]);
 
+const [image,SetImage] = useState([]);
 
 const usernameRef = useRef();
 const passwordRef = useRef();
@@ -291,6 +292,7 @@ const streetNumrRef = useRef();
   //NO IMAGE CHECK OR SAVE~~!!!!!
   //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+
   function CheckFormOnSubmition(e){
     console.log("CheckFormOnSubmition")
     e.preventDefault();
@@ -305,7 +307,7 @@ const streetNumrRef = useRef();
         let newUser = {
         "username": usernameRef.current.value,
         "password": passwordRef.current.value,
-        //insert img here;
+        "image": image,
         "firstname": firstnameRef.current.value,
         "lastname": lastnameRef.current.value,
         "email": emailRef.current.value,
@@ -362,8 +364,10 @@ const streetNumrRef = useRef();
         <label htmlFor="register-password-confirmation">אימות סיסמה:</label>
         <input type="password" name="password" id="register-password-confirmation" ref={rePasswordRef} title='בין 7 ל 12 תווים, לפחות אות גדולה אחת, תו מיוחד ומספר' minLength={7} maxLength={12} onKeyUp={(e) => CheckPasswordChars(e.target)} onBlur = {(e) => CheckRePassword(e.target,passwordRef.current)} required />
 
+
         <label htmlFor="register-image">תמונה:</label>
-        <input type="file" name="user-image" id="register-image" accept='image/jpeg, image/jpg' ref={imageRef} required />
+        <input type="file" name="user-image" id="register-image" accept='image/jpeg, image/jpg' ref={imageRef} onChange={(e) => SetImage(URL.createObjectURL(e.target.files[0]))} required />
+
 
         <label htmlFor="first-name">שם פרטי:</label>
         <input type="text" name="first-name" id="first-name" ref={firstnameRef} onKeyUp={(e) => CheckNameChars(e.target)} required />
@@ -397,6 +401,11 @@ const streetNumrRef = useRef();
         <button type='sumbit'>הרשם</button>
 
     </form>
+
+    <div>
+      <h2>כבר רשום?</h2>
+      <button onClick={(e) =>navigation('/login')}>לחץ כאן להחברות</button>
+    </div>
     
     </>
   )

@@ -117,6 +117,11 @@ export default function Login() {
         <input ref={passwordRef} type="password" id='user-password' title='בין 7 ל 12 תווים, לפחות אות גדולה אחת, תו מיוחד ומספר' minLength={7} maxLength={12} onKeyUp={(e) => CheckPasswordChars(e.target)} required />
         <button>התחבר/י</button>
     </form>
+
+    <div>
+      <h2>עדיין לא משתמש רשום?</h2>
+      <button onClick={(e) =>navigation('/register')}>לחץ כאן להרשמה</button>
+    </div>
     </>
   )
 }
