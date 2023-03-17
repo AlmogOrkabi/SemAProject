@@ -96,6 +96,14 @@ export default function Login() {
     //delete before submitting
     alert(`Welcome Back ${user.username}`);
     navigation(`/profile/${user.username}`) 
+
+    //idea for the admin vs normal user login:
+    /*
+    adding a boolean: Admin == true / false
+    OR
+    saving the admins in a different array and checking the admin's array first(it is supposed to be shorter than the normal users array)
+    */
+
   }
   else{
     alert('User Not Found');
