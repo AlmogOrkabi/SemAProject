@@ -1,11 +1,11 @@
 [
     {
         "username": "admin",
-        "password": "admin1234admin"
+        "password": "admin1234"
     },
     {
         "username": "testuser1",
-        "password": "testUser123!!",
+        "password": "testUser123!",
         "image": "https://www.shutterstock.com/image-photo/skeptic-surprised-cat-thinking-dont-260nw-1905929728.jpg",
         "firstname": "user",
         "lastname": "test",

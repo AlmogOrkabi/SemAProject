@@ -95,7 +95,7 @@ export default function Login() {
   if (user != undefined){
 
     if (user.username  == 'admin'){
-      navigation(`/admin/${user.username}`) 
+      navigation(`/admin`) 
     }
     else{
     //delete before submitting
