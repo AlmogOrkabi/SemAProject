@@ -28,7 +28,7 @@ export default function Profile() {
 return (
 <>
 <h1>Welcome Back {loggedUser.username}</h1>
-<img src={users.find((u) => u.username == username).image} alt="" />
+<img src={loggedUser.image} alt="" />
 </>  
 )
 }

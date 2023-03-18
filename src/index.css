@@ -34,3 +34,31 @@
   outline-offset: -1.5px;
 }
 
+
+.user-table{
+  margin: 1rem;
+  text-align: right;
+  /* border: solid 3px rgba(119, 136, 153, 0.39); */
+  border-radius: 5px;
+  border-collapse: collapse;
+  outline: 3px solid hsla(0, 3%, 74%, 0.623);
+  outline-offset: 3px;
+
+  
+  
+}
+/**/
+.user-table th{
+border-bottom: 1px solid darkgray;
+line-height: 1.5rem;
+}
+
+.user-table th,td{
+  padding-inline-end: 1.5rem;
+}
+
+.user-table img{
+  max-width: 50%;
+  border-radius: 50%;
+}
+
