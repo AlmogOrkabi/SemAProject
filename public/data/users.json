@@ -6,7 +6,7 @@
     {
         "username": "testuser1",
         "password": "testUser123!!",
-        "image": "image.png",
+        "image": "https://www.shutterstock.com/image-photo/skeptic-surprised-cat-thinking-dont-260nw-1905929728.jpg",
         "firstname": "user",
         "lastname": "test",
         "email": "testuser@gmail.com",
