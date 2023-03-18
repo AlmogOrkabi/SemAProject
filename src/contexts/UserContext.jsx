@@ -35,6 +35,9 @@ export default function UserContextProvider({children}) {
 
     },[]);
 
+    const [loggedUser, SetLoggedUser] = useState({}); // the user currently logged in 
+
+
 
 const CheckHebrewLetters = (ch) => {
   return ch >= 'א'&& ch <= 'ת'
@@ -360,7 +363,7 @@ async function LoadCities(){
 
     const LoadUsers = async () => {
         try {
-            let res = await fetch("../public/data/users0json");
+            let res = await fetch("../public/data/users.json");
             let data = await res.json();
             console.log(data);
             SetUsers(data);
@@ -380,6 +383,7 @@ async function LoadCities(){
     const Login = (username, password) => {
         let user = users.find((u) => u.username == username && u.password == password)
         console.log(user)
+        SetLoggedUser(user);
         return user;
     }
 
@@ -392,7 +396,7 @@ async function LoadCities(){
 
     //const value = {users,AddNewUser,FindUser,Login};
 
-    const value = {users,FindUser,Login,AddNewUser,CheckUserNameInput,CalcAge,CheckPasswordChars,CheckPasswordValidity,CheckRePassword,CheckUserAge,CheckCity,CheckNameChars,CheckEmailChars,CheckEmailValidity,CheckInputLanguage,CheckStreetNumber,LoadCities,cities};
+    const value = {users,FindUser,Login,AddNewUser,CheckUserNameInput,CalcAge,CheckPasswordChars,CheckPasswordValidity,CheckRePassword,CheckUserAge,CheckCity,CheckNameChars,CheckEmailChars,CheckEmailValidity,CheckInputLanguage,CheckStreetNumber,LoadCities,cities,loggedUser};
 
     return (
         <UserContext.Provider value={value}>
