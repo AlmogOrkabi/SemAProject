@@ -32,7 +32,7 @@ export default function UserContextProvider({children}) {
     const [users,SetUsers] = useState([]);
 
     useEffect(() => {
-
+      LoadUsers();
     },[]);
 
     const [loggedUser, SetLoggedUser] = useState({}); // the user currently logged in 

@@ -93,9 +93,14 @@ export default function Login() {
   event.preventDefault(); 
   let user = Login(usernameRef.current.value,passwordRef.current.value);
   if (user != undefined){
+
+    if (user.username  == 'admin'){
+      navigation(`/admin/${user.username}`) 
+    }
+    else{
     //delete before submitting
     alert(`Welcome Back ${user.username}`);
-    navigation(`/profile/${user.username}`) 
+    navigation(`/profile/${user.username}`) }
 
     //idea for the admin vs normal user login:
     /*
