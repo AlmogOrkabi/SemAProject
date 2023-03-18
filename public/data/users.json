@@ -2,6 +2,17 @@
     {
         "username": "admin",
         "password": "admin1234admin"
+    },
+    {
+        "username": "testuser1",
+        "password": "testUser123!!",
+        "image": "image.png",
+        "firstname": "user",
+        "lastname": "test",
+        "email": "testuser@gmail.com",
+        "birthdate": "2000/01/01",
+        "city": "תל אביב ",
+        "street": "עין הקורא",
+        "streetNumber": 10
     }
-    
 ]
