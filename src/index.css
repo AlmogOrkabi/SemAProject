@@ -50,15 +50,34 @@
 /**/
 .user-table th{
 border-bottom: 1px solid darkgray;
-line-height: 1.5rem;
+line-height: 1.7rem;
 }
 
 .user-table th,td{
-  padding-inline-end: 1.5rem;
+  /* padding-inline-end: 1.5rem; */
+  padding-inline-end: 3%;
+  font-size: clamp(0.75rem,2vw,1.5rem);
 }
 
 .user-table img{
-  max-width: 50%;
+  margin-top: 3px;
+  max-width: 80%;
   border-radius: 50%;
 }
 
+.user-component-btn{
+  border: none;
+  background: none;
+  font-size: 0.8em;
+
+}
+
+.user-component-btn:hover{
+  color: green;
+}
+
+.admin-actions{
+display: flex;
+flex-direction: row;
+gap: 1em;
+}

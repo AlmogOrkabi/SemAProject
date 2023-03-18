@@ -208,7 +208,7 @@ function CheckCity(target){
 //only letters (hebrew and english) **check only one language**
 function CheckNameChars(target){
     for(let i = 0; i <target.value.length; i++){
-    if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && CheckHebrewLetters(target.value[i]) == false){
+    if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && CheckHebrewLetters(target.value[i]) == false && target.value[i] != ' '){
       target.value = target.value.slice(0,i);
       target.classList.add('border-red');
     }
