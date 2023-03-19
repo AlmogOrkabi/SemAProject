@@ -350,7 +350,7 @@ const streetNumrRef = useRef();
     <form action="" onSubmit={(e) => CheckFormOnSubmition(e)} className='form register-form flex-column'>
 
         <label htmlFor="register-username">שם משתמש:</label>
-        <input type="text" id='register-username' name='password' ref={usernameRef} required   maxLength={60}  onKeyUp={(event) => CheckUserNameInput(event.target)} />
+        <input type="text" id='register-username' name='username' ref={usernameRef} required   maxLength={60}  onKeyUp={(event) => CheckUserNameInput(event.target)} />
         {/* pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*?[!@#$%^&*+`~'=?\|\]\[\(\)\-<>/])" */}
 
 

@@ -2,6 +2,8 @@ import React from 'react'
 import { useContext,useState,useEffect,useRef } from 'react'
 import { UserContext } from '../contexts/UserContext'
 import { useParams,useNavigate } from 'react-router-dom';
+import {useForm} from 'react-hook-form';
+
 
 export default function Edit() {
 const {FindUser,AddNewUser,CheckUserNameInput,CalcAge,CheckPasswordChars,CheckPasswordValidity,CheckRePassword,CheckUserAge,CheckCity,CheckNameChars,CheckEmailChars,CheckEmailValidity,CheckInputLanguage,CheckStreetNumber,LoadCities,cities,users} = useContext(UserContext)
@@ -13,41 +15,70 @@ const navigation = useNavigate();
 
 const [image,SetImage] = useState([]);
 
-const usernameRef = useRef();
-const passwordRef = useRef();
-const rePasswordRef = useRef();
-const imageRef = useRef();
-const firstnameRef = useRef();
-const lastnameRef = useRef();
-const emailRef = useRef();
-const bdateRef = useRef();
-const cityRef = useRef();
-const streetRef = useRef();
-const streetNumrRef = useRef();
+// const usernameRef = useRef();
+// const passwordRef = useRef();
+// const rePasswordRef = useRef();
+// const imageRef = useRef();
+// const firstnameRef = useRef();
+// const lastnameRef = useRef();
+// const emailRef = useRef();
+// const bdateRef = useRef();
+// const cityRef = useRef();
+// const streetRef = useRef();
+// const streetNumrRef = useRef();
 
-  function CheckFormOnSubmition(e){
-    console.log("CheckFormOnSubmition")
-    e.preventDefault();
-    if(CheckUserNameInput(usernameRef.current) && CheckPasswordValidity(passwordRef.current,rePasswordRef.current) && CheckRePassword(rePasswordRef.current,passwordRef.current) && CheckNameChars(firstnameRef.current) && CheckNameChars(lastnameRef.current) && CheckEmailValidity(emailRef.current) && CheckUserAge(bdateRef.current)&&CheckCity(cityRef.current) &&CheckInputLanguage(streetRef.current) && CheckStreetNumber(streetNumrRef.current)){
-      console.log("valid form")
-      //SAVE CHANGES FUNCTION
-    }
-    //### add an eles which shows what is wrong with the form inputs to the user!!! ###
-  }
+  // function CheckFormOnSubmition(e){
+  //   console.log("CheckFormOnSubmition")
+  //   e.preventDefault();
+  //   if(CheckUserNameInput(usernameRef.current) && CheckPasswordValidity(passwordRef.current,rePasswordRef.current) && CheckRePassword(rePasswordRef.current,passwordRef.current) && CheckNameChars(firstnameRef.current) && CheckNameChars(lastnameRef.current) && CheckEmailValidity(emailRef.current) && CheckUserAge(bdateRef.current)&&CheckCity(cityRef.current) &&CheckInputLanguage(streetRef.current) && CheckStreetNumber(streetNumrRef.current)){
+  //     console.log("valid form")
+  //     //SAVE CHANGES FUNCTION
+  //   }
+  //   //### add an eles which shows what is wrong with the form inputs to the user!!! ###
+  // }
 
   useEffect(()=>{
     SetUser(users.find((u) => u.username === username));
     LoadCities();
   },[])
 
+
+
+const {register,handleSubmit,formState:{errors}} = useForm({mode:"all"});
+
+
+
+  const ValidateForm = (data) =>{
+
+    console.log(data);
+  }
+
+
+
+
+
+
+
+
   return (
     <>
     <h1>עריכת פרופיל: {user.username}</h1>
 
+    <form action="" onSubmit={handleSubmit((data) => console.log(data))}>
+      <div className="form-group">
+        <label htmlFor="username">שם משתמש:</label>
+      <input type="text" name="" id="username" {...register("username",{required:"שדה חובה"})}/>
+      <p>{errors.username?.message}</p>
+      </div>
+
+      <button>שמור שינויים</button>
+
+    </form>
+
   {/*  <form action="" onSubmit={(e) => CheckFormOnSubmition(e)} className='form register-form flex-column'>
 
         <label htmlFor="register-username">שם משתמש:</label>
-        <input type="text" id='register-username' name='password' ref={usernameRef} required   maxLength={60}  onKeyUp={(event) => CheckUserNameInput(event.target)} />
+        <input type="text" id='register-username' name='username' ref={usernameRef} required   maxLength={60}  onKeyUp={(event) => CheckUserNameInput(event.target)} />
 
 
 

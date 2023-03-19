@@ -100,3 +100,10 @@ display: flex;
 flex-direction: row;
 gap: 0.8em;
 }
+
+/*________NEW FORM_________*/
+
+.form-group{
+  display: flex;
+  flex-direction: column;
+}
