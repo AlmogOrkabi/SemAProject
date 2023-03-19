@@ -394,9 +394,15 @@ async function LoadCities(){
         console.log(users);
     }
 
+    const DeleteUser = (key) => {
+      SetUsers(users.filter((u) => u.username != key));
+
+    }
+
+
     //const value = {users,AddNewUser,FindUser,Login};
 
-    const value = {users,FindUser,Login,AddNewUser,CheckUserNameInput,CalcAge,CheckPasswordChars,CheckPasswordValidity,CheckRePassword,CheckUserAge,CheckCity,CheckNameChars,CheckEmailChars,CheckEmailValidity,CheckInputLanguage,CheckStreetNumber,LoadCities,cities,loggedUser};
+    const value = {users,FindUser,Login,AddNewUser,CheckUserNameInput,CalcAge,CheckPasswordChars,CheckPasswordValidity,CheckRePassword,CheckUserAge,CheckCity,CheckNameChars,CheckEmailChars,CheckEmailValidity,CheckInputLanguage,CheckStreetNumber,LoadCities,cities,loggedUser,DeleteUser};
 
     return (
         <UserContext.Provider value={value}>

@@ -27,11 +27,11 @@ function App() {
       <Route path ='/register' element={<Register/>} />
       <Route path ='/profile' element={<Profile/>} >
         <Route path='/profile/:username' element={<Profile/>}>
-          <Route path='/profile/:username/editProfile' element={<Edit/>}/>
+          <Route path='/profile/:username/edit/:username' element={<Edit/>}/>
         </Route>
       </Route>
       <Route path ='/admin' element={<Admin/>}/>
-      <Route path ='/edit' element={<Edit/>} />
+      <Route path ='/edit/:username' element={<Edit/>} />
       <Route path ='/*' element={<NotFound/>} />
     </Routes>
   </BrowserRouter>

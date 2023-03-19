@@ -62,22 +62,41 @@ line-height: 1.7rem;
 .user-table img{
   margin-top: 3px;
   max-width: 80%;
+  height: auto;
   border-radius: 50%;
+  /* outline: 0.2rem solid rgba(82, 161, 226, 0.575); */
 }
 
 .user-component-btn{
-  border: none;
-  background: none;
-  font-size: 0.8em;
-
+  border-style: hidden;
+  border-radius: 3px;
+  /* background: none; */
+  /* font-size: 0.8em; */
+  padding: 0.2em;
 }
 
-.user-component-btn:hover{
+/* .user-component-btn:hover{
   color: green;
+} */
+
+.user-delete-btn{
+  background-color: rgba(255, 0, 0, 0.623);
+}
+
+.user-delete-btn:hover{
+  background-color: rgba(255, 0, 0, 0.507);
+}
+
+.user-edit-btn{
+  background-color: rgba(0, 128, 0, 0.664);
+}
+
+.user-edit-btn:hover{
+  background-color: rgba(0, 128, 0, 0.555);
 }
 
 .admin-actions{
 display: flex;
 flex-direction: row;
-gap: 1em;
+gap: 0.8em;
 }

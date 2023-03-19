@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 export default function Admin() {
-  const {users,loggedUser} = useContext(UserContext);
+  const {users,loggedUser,SetUsers,DeleteUser} = useContext(UserContext);
   const navigation = useNavigate();
 
   useEffect(() => {
@@ -17,6 +17,7 @@ export default function Admin() {
     }
     console.log('admin page loaded');
   },[])
+
 
   return (
     <>

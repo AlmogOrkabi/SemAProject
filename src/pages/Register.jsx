@@ -288,9 +288,6 @@ const streetNumrRef = useRef();
 // }
 
 
-  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  //NO IMAGE CHECK OR SAVE~~!!!!!
-  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
   function CheckFormOnSubmition(e){
