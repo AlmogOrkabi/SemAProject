@@ -6,7 +6,7 @@ import {useForm} from 'react-hook-form';
 
 
 export default function Edit() {
-const {FindUser,AddNewUser,CheckUserNameInput,CalcAge,CheckPasswordChars,CheckPasswordValidity,CheckRePassword,CheckUserAge,CheckCity,CheckNameChars,CheckEmailChars,CheckEmailValidity,CheckInputLanguage,CheckStreetNumber,LoadCities,cities,users} = useContext(UserContext)
+const {FindUser,AddNewUser,LoadCities,cities,users} = useContext(UserContext)
 
 const navigation = useNavigate();
   const {username} = useParams();
@@ -16,7 +16,7 @@ const navigation = useNavigate();
 const [image,SetImage] = useState([]);
 
 // const usernameRef = useRef();
-// const passwordRef = useRef();
+ const newpasswordRef = useRef();
 // const rePasswordRef = useRef();
 // const imageRef = useRef();
 // const firstnameRef = useRef();
@@ -43,7 +43,6 @@ const [image,SetImage] = useState([]);
   },[])
 
 
-
 const {register,handleSubmit,formState:{errors}} = useForm({mode:"all"});
 
 
@@ -54,26 +53,131 @@ const {register,handleSubmit,formState:{errors}} = useForm({mode:"all"});
   }
 
 
+/*______________________________________________________*/
 
 
+const CheckHebrew = (value) =>{
+  return /[א-ת]/.test(value);
+}
 
 
+//checks special characters
+const CheckSpecialChar = (value) =>{
+  //  \p{L} ---> any unicode letter
+  //  \p{N} ---> any unicode digit
+  //  +/u --> flags the end of the regular expression and indicates it's to be treated as a unicode regular expression
+  
+  return /[^\p{L}\p{N}]+/u.test(value);
+}
+
+const CheckUpperCase = (value) =>{
+  return /[A-Z]/.test(value)
+}
+
+const CheckNumber = (value) =>{
+  return /[0-9]/.test(value);
+}
+
+
+function CheckUsernameValidity(value){
+  if(CheckHebrew(value)) {
+    return "אותיות לועזיות בלבד";
+  }
+  if(value.length > 60){
+    return "עד 60 תווים בלבד"
+  }
+}
+
+
+function CheckPasswordValidity(value){
+  if(CheckHebrew(value)){
+    return "אותיות לועזיות מספרים ותווים מיוחדים בלבד"
+  }
+  else if(value.length < 7){
+    return"7 תווים לפחות"
+  }
+  else if(CheckSpecialChar(value) == false ||CheckUpperCase(value) == false|| CheckNumber(value) == false){
+    return "חובה לפחות אות גדולה אחת תו מיוחד ומספר"
+  }
+
+  else if(value.length > 12 ){
+      return "עד 12 תווים בלבד"
+  }
+}
+
+  function CheckEmailValidity(value){
+    if(CheckHebrew(value)) {
+      return "כתובת מייל חייבת לכלול רק אותיות באנגלית";
+    }
+    else if( value.split('@').length - 1 != 1){
+      return "תו @ אחד בלבד";
+
+    }
+    else if(value.endsWith('.com') == false){
+      return "סיומת .com בלבד";
+    }
+    else{
+    
+      return true;
+    } 
+}
 
 
   return (
     <>
     <h1>עריכת פרופיל: {user.username}</h1>
 
-    <form action="" onSubmit={handleSubmit((data) => console.log(data))}>
+    <div className='form-container'>
+
+      <form action="" onSubmit={handleSubmit(ValidateForm)}>
+
       <div className="form-group">
         <label htmlFor="username">שם משתמש:</label>
-      <input type="text" name="" id="username" {...register("username",{required:"שדה חובה"})}/>
-      <p>{errors.username?.message}</p>
+      <input type="text" name="username" id="username" maxLength={60} {...register("username",{required:"שדה חובה",
+    validate:CheckUsernameValidity})}/> 
+      {/* #####  added maxLenght to prevent the user from entering more than 60 chars ##### */}
+      <p className='form-input-error'>{errors.username?.message}</p>
       </div>
+
+
+      <div className="form-group">
+        <label htmlFor="password">סיסמה חדשה:</label>
+      <input type="password" name="password" id="password" maxLength={12} {...register("password",{required:"שדה חובה",
+        validate:CheckPasswordValidity})}/>
+      <p className='form-input-error'>{errors.password?.message}</p>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="password">סיסמה חדשה:</label>
+      <input type="password" name="password" id="password" maxLength={12} {...register("password",{required:"שדה חובה",
+        validate:CheckPasswordValidity})}/>
+      <p className='form-input-error'>{errors.password?.message}</p>
+      </div>
+
+
+      <div className="form-group">
+        <label htmlFor="repassword">ווידוא סיסמה חדשה:</label>
+      <input type="repassword" name="repassword" id="repassword" maxLength={12} {...register("repassword",{required:"שדה חובה",
+        validate:CheckPasswordValidity})}/>
+      <p className='form-input-error'>{errors.password?.message}</p>
+      </div>
+
+
+
+
+      <div className="form-group">
+        <label htmlFor="new-email">כתובת מייל חדשה:</label>
+        <input type="text" name="newemail" id="new-email" {...register("newemail",{required:"שדה חובה",
+        validate:CheckEmailValidity
+        })}/>
+      <p className='form-input-error'>{errors.newemail?.message}</p>
+      </div>
+
 
       <button>שמור שינויים</button>
 
     </form>
+    </div>
 
   {/*  <form action="" onSubmit={(e) => CheckFormOnSubmition(e)} className='form register-form flex-column'>
 

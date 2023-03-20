@@ -4,6 +4,8 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: Verdana, sans-serif;
+  /* font-family: 'Courier New', monospace; */
 }
 
 * {
@@ -56,12 +58,13 @@ line-height: 1.7rem;
 .user-table th,td{
   /* padding-inline-end: 1.5rem; */
   padding-inline-end: 3%;
-  font-size: clamp(0.75rem,2vw,1.5rem);
+  font-size: clamp(0.7rem,1vw,1rem);
 }
 
 .user-table img{
-  margin-top: 3px;
-  max-width: 80%;
+  margin-top: 5%;
+  max-width: 70%;
+  min-width: 4rem;
   height: auto;
   border-radius: 50%;
   /* outline: 0.2rem solid rgba(82, 161, 226, 0.575); */
@@ -102,8 +105,25 @@ gap: 0.8em;
 }
 
 /*________NEW FORM_________*/
+.form-container{
+  margin-inline: 10%;
+  margin-block: 10%;
+  max-width: 50%;
+}
+
+.form-container input{
+  max-width: 50%;
+}
+
+input:focus{
+  outline-color: rgba(0, 26, 255, 0.712);
+}
 
 .form-group{
   display: flex;
   flex-direction: column;
+}
+.form-input-error{
+  color: red;
+  font-size: 0.65rem;
 }
