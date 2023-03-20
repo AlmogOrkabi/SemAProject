@@ -16,7 +16,7 @@ const navigation = useNavigate();
 const [image,SetImage] = useState([]);
 
 // const usernameRef = useRef();
- const newpasswordRef = useRef();
+  const passwordRef = useRef();
 // const rePasswordRef = useRef();
 // const imageRef = useRef();
 // const firstnameRef = useRef();
@@ -43,7 +43,7 @@ const [image,SetImage] = useState([]);
   },[])
 
 
-const {register,handleSubmit,formState:{errors}} = useForm({mode:"all"});
+const {register,handleSubmit,formState:{errors},watch} = useForm({mode:"all"});
 
 
 
@@ -105,6 +105,16 @@ function CheckPasswordValidity(value){
   }
 }
 
+
+function CheckPasswordsMatch(value){
+  if(value != watch("password")){
+    return "סיסמאות לא תואמות"
+  }
+  else{
+    return true;
+  }
+}
+
   function CheckEmailValidity(value){
     if(CheckHebrew(value)) {
       return "כתובת מייל חייבת לכלול רק אותיות באנגלית";
@@ -147,19 +157,13 @@ function CheckPasswordValidity(value){
       <p className='form-input-error'>{errors.password?.message}</p>
       </div>
 
-      <div className="form-group">
-        <label htmlFor="password">סיסמה חדשה:</label>
-      <input type="password" name="password" id="password" maxLength={12} {...register("password",{required:"שדה חובה",
-        validate:CheckPasswordValidity})}/>
-      <p className='form-input-error'>{errors.password?.message}</p>
-      </div>
 
 
       <div className="form-group">
         <label htmlFor="repassword">ווידוא סיסמה חדשה:</label>
       <input type="repassword" name="repassword" id="repassword" maxLength={12} {...register("repassword",{required:"שדה חובה",
-        validate:CheckPasswordValidity})}/>
-      <p className='form-input-error'>{errors.password?.message}</p>
+        validate:CheckPasswordsMatch})}/>
+      <p className='form-input-error'>{errors.repassword?.message}</p>
       </div>
 
 
