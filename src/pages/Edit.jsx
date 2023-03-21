@@ -3,6 +3,7 @@ import { useContext,useState,useEffect,useRef } from 'react'
 import { UserContext } from '../contexts/UserContext'
 import { useParams,useNavigate } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
+import { min } from 'moment/moment';
 
 
 export default function Edit() {
@@ -15,27 +16,6 @@ const navigation = useNavigate();
 
 const [image,SetImage] = useState([]);
 
-// const usernameRef = useRef();
-  const passwordRef = useRef();
-// const rePasswordRef = useRef();
-// const imageRef = useRef();
-// const firstnameRef = useRef();
-// const lastnameRef = useRef();
-// const emailRef = useRef();
-// const bdateRef = useRef();
-// const cityRef = useRef();
-// const streetRef = useRef();
-// const streetNumrRef = useRef();
-
-  // function CheckFormOnSubmition(e){
-  //   console.log("CheckFormOnSubmition")
-  //   e.preventDefault();
-  //   if(CheckUserNameInput(usernameRef.current) && CheckPasswordValidity(passwordRef.current,rePasswordRef.current) && CheckRePassword(rePasswordRef.current,passwordRef.current) && CheckNameChars(firstnameRef.current) && CheckNameChars(lastnameRef.current) && CheckEmailValidity(emailRef.current) && CheckUserAge(bdateRef.current)&&CheckCity(cityRef.current) &&CheckInputLanguage(streetRef.current) && CheckStreetNumber(streetNumrRef.current)){
-  //     console.log("valid form")
-  //     //SAVE CHANGES FUNCTION
-  //   }
-  //   //### add an eles which shows what is wrong with the form inputs to the user!!! ###
-  // }
 
   useEffect(()=>{
     SetUser(users.find((u) => u.username === username));
@@ -43,15 +23,37 @@ const [image,SetImage] = useState([]);
   },[])
 
 
-const {register,handleSubmit,formState:{errors},watch} = useForm({mode:"all"});
+const {register,handleSubmit,formState:{errors},watch, trigger} = useForm({mode:"all"});
 
 
 
   const ValidateForm = (data) =>{
 
     console.log(data);
+
+    UpdateUser(data);
   }
 
+
+
+
+  function UpdateUser(data){
+
+
+    user.username = data.username;
+    user.password = data.password;
+    user.image = URL.createObjectURL(data.image[0]);
+    user.firstname = data.firstname;
+    user.lastname = data.lastname;
+    user.email = data.email;
+    user.birthdate = data.birthdate;
+    user.city = data.city;
+    user.street = data.street;
+    user.streetnumber = data.streetnumber;
+
+    console.log(users)
+    console.log(user)
+  }
 
 /*______________________________________________________*/
 
@@ -67,11 +69,15 @@ const CheckSpecialChar = (value) =>{
   //  \p{N} ---> any unicode digit
   //  +/u --> flags the end of the regular expression and indicates it's to be treated as a unicode regular expression
   
-  return /[^\p{L}\p{N}]+/u.test(value);
+  return /[^\p{L}\p{N}\s]+/u.test(value);
 }
 
 const CheckUpperCase = (value) =>{
   return /[A-Z]/.test(value)
+}
+
+const CheckLowerCase = (value) =>{
+  return /[a-z]/.test(value);
 }
 
 const CheckNumber = (value) =>{
@@ -115,6 +121,16 @@ function CheckPasswordsMatch(value){
   }
 }
 
+function CheckNameValidity(value){
+  const space = /[`\s`]/;
+  if(CheckSpecialChar(value)|| CheckNumber(value)){
+    return "אותיות בלבד"
+  }
+  else{
+    return true;
+  }
+}
+
   function CheckEmailValidity(value){
     if(CheckHebrew(value)) {
       return "כתובת מייל חייבת לכלול רק אותיות באנגלית";
@@ -130,6 +146,63 @@ function CheckPasswordsMatch(value){
     
       return true;
     } 
+}
+
+
+const CalcAge = (value) =>{
+
+  let today = new Date(); // current date - recieved by the browser
+  let userBday = new Date(value) // user input birth date
+  let userAge = today.getFullYear() - userBday.getFullYear(); // rough calculation of age 
+  let currentMonth = today.getMonth();
+  let currentDay = today.getDate(); //gets the day of the month 
+
+  if( today.getMonth() - userBday.getMonth() < 0 || today.getMonth() - userBday.getMonth() == 0 && today.getDate() < userBday.getDate()){
+    userAge--;
+  }
+  console.log(userAge)
+  return userAge;
+}
+
+function CheckUserAge(value){
+  console.log("check age")
+  let age = CalcAge(value);
+    if( age >= 120 || age <= 0 || age == NaN){
+      console.log("age not valid")
+      return "תאריך לא תקין";
+    }
+    else{
+      return true;
+    }
+}
+
+
+function CheckCity(value){
+  //let city = value.value;
+  console.log(value)
+
+  for(let i = 0; i < cities.length; i++){
+    if(cities[i].שם_ישוב == value){
+      console.log("City FOUND")
+      return true
+    }
+  }
+  return "נא לבחור עיר מתוך הרשימה"
+}
+
+
+
+function CheckStreet(value){
+  if(CheckNumber(value)|| CheckUpperCase(value) || CheckLowerCase(value) || CheckSpecialChar(value))
+  {
+    return "רק אותיות בעברית"
+  }
+  else if(value.trim().length == 0){
+    return 'שדה חובה'
+  }
+  else{
+    return true;
+  }
 }
 
 
@@ -152,7 +225,7 @@ function CheckPasswordsMatch(value){
 
       <div className="form-group">
         <label htmlFor="password">סיסמה חדשה:</label>
-      <input type="password" name="password" id="password" maxLength={12} {...register("password",{required:"שדה חובה",
+      <input type="password" name="password" id="password" maxLength={12} onKeyUp={() => trigger("repassword")} {...register("password",{required:"שדה חובה",
         validate:CheckPasswordValidity})}/>
       <p className='form-input-error'>{errors.password?.message}</p>
       </div>
@@ -161,21 +234,101 @@ function CheckPasswordsMatch(value){
 
       <div className="form-group">
         <label htmlFor="repassword">ווידוא סיסמה חדשה:</label>
-      <input type="repassword" name="repassword" id="repassword" maxLength={12} {...register("repassword",{required:"שדה חובה",
+      <input type="password" name="repassword" id="repassword" maxLength={12} {...register("repassword",{required:"שדה חובה",
         validate:CheckPasswordsMatch})}/>
       <p className='form-input-error'>{errors.repassword?.message}</p>
+      </div>
+
+
+      <div className="form-group">
+        <label htmlFor="image">תמונה:</label>
+      <input type="file" name="image" id="image"  accept='image/jpeg, image/jpg' {...register("image",{
+        required:"שדה חובה"
+        })}/>
+      <p className='form-input-error'>{errors.image?.message}</p>
       </div>
 
 
 
 
       <div className="form-group">
+        <label htmlFor="first-name">שם פרטי:</label>
+      <input type="text" name="first-name" id="first-name" {...register("firstname",
+        {required:"שדה חובה",
+        validate:CheckNameValidity})}/> 
+      <p className='form-input-error'>{errors.firstname?.message}</p>
+      </div>
+
+
+      <div className="form-group">
+        <label htmlFor="last-name">שם משפחה:</label>
+      <input type="text" name="last-name" id="last-name" {...register("lastname",
+        {required:"שדה חובה",
+        validate:CheckUserAge})}/> 
+      <p className='form-input-error'>{errors.lastname?.message}</p>
+      </div>
+
+
+
+      <div className="form-group">
         <label htmlFor="new-email">כתובת מייל חדשה:</label>
-        <input type="text" name="newemail" id="new-email" {...register("newemail",{required:"שדה חובה",
+        <input type="text" name="email" id="new-email" {...register("newemail",{required:"שדה חובה",
         validate:CheckEmailValidity
         })}/>
       <p className='form-input-error'>{errors.newemail?.message}</p>
       </div>
+
+
+
+      <div className="form-group">
+        <label htmlFor="birth-date">תאריך לידה:</label>
+        <input type="date" name="birthdate" id="birth-date" min="1920-01-01" {...register("birthdate",
+        {required:"שדה חובה",
+        validate:CheckUserAge})}/> 
+        <p className='form-input-error'>{errors.birthdate?.message}</p>
+      </div>
+
+
+      <div className="form-group"> 
+        <label htmlFor="city">עיר מגורים:</label>
+        <input type="text" name="city" id="city" list='city-list' {...register("city",
+        {required:"שדה חובה",
+        validate:CheckCity})}/>
+        <datalist id='city-list' >
+          {
+            cities.map((city) => <option key = {city.שם_ישוב} value={city.שם_ישוב} ></option>)
+          }
+        </datalist>
+        <p className='form-input-error'>{errors.city?.message}</p>
+      </div>
+
+
+      <div className="form-group">
+        <label htmlFor="street">רחוב:</label>
+      <input type="text" name="street" id="street" {...register("street",
+        {required:"שדה חובה",
+        validate:CheckStreet})}/> 
+      <p className='form-input-error'>{errors.street?.message}</p>
+      </div>
+
+
+      <div className="form-group">
+        <label htmlFor="street-number">מספר רחוב:</label>
+      <input type="number" name="street-number" id="street-number" {...register("streetnumber",
+        {required:"שדה חובה",
+        pattern:{
+          value: /^[0-9]*$/,
+            message: "נא להזין מספר חיובי בלבד"
+        },
+        min:{
+          value: 1,
+          message: "נא להזין מספר  חיובי בלבד"
+
+        }
+        })}/> 
+      <p className='form-input-error'>{errors.streetnumber?.message}</p>
+      </div>
+
 
 
       <button>שמור שינויים</button>

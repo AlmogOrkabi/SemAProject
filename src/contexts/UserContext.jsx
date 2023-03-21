@@ -77,6 +77,7 @@ const CalcAge = (value) =>{
     userAge--;
   }
   console.log(userAge)
+  return userAge;
 
 }
 
