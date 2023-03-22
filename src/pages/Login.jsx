@@ -2,21 +2,21 @@ import React from 'react'
 import { useRef,useEffect, useContext } from 'react'
 import { UserContext } from '../contexts/UserContext.jsx';
 import { useNavigate } from 'react-router-dom'
+import {useForm} from 'react-hook-form';
 
 export default function Login() {
 
 
-  const {users,Login,CheckPasswordChars,CheckUserNameInput} = useContext(UserContext);
+const {users,Login,CheckUsernameValidity,CheckPasswordValidity,loggedUser,SetLoggedUser} = useContext(UserContext)
 
   const navigation = useNavigate();
 
+  const {register,handleSubmit,formState:{errors},watch, trigger} = useForm({mode:"all"});
 
   useEffect(() => {
   
   },[]);
 
-  const usernameRef = useRef();
-  const passwordRef = useRef();
 
 
 
@@ -89,10 +89,10 @@ export default function Login() {
 
 
 
-  const UserLogin = (event) => {
-  event.preventDefault(); 
-  let user = Login(usernameRef.current.value,passwordRef.current.value);
+  const UserLogin = (data) => {
+  let user = Login(data.username,data.password);
   if (user != undefined){
+    SetLoggedUser(user);
 
     if (user.username  == 'admin'){
       navigation(`/admin`) 
@@ -121,15 +121,25 @@ export default function Login() {
   return (
     <>
     <h1>Login Page</h1>
-        <form onSubmit={UserLogin}>
-        <label htmlFor='user-login'>שם משתמש:</label>
-        <input type="text" id='user-login' ref={usernameRef} required   maxLength={60}  onKeyUp={(event) => CheckUserNameInput(event.target)} />
-        
+<div className="form-container">
+          <form onSubmit={handleSubmit(UserLogin)}>
+      <div className="form-group">
+        <label htmlFor="username">שם משתמש:</label>
+      <input type="text" name="username" id="username" maxLength={60} {...register("username",{required:"שדה חובה",
+      validate:CheckUsernameValidity})}/> 
+      {/* #####  added maxLenght to prevent the user from entering more than 60 chars ##### */}
+      <p className='form-input-error'>{errors.username?.message}</p>
+      </div>
 
-        <label htmlFor='user-password'>סיסמה:</label>
-        <input ref={passwordRef} type="password" id='user-password' title='בין 7 ל 12 תווים, לפחות אות גדולה אחת, תו מיוחד ומספר' minLength={7} maxLength={12} onKeyUp={(e) => CheckPasswordChars(e.target)} required />
+
+      <div className="form-group">
+        <label htmlFor="password">סיסמה:</label>
+      <input type="password" name="password" id="password" maxLength={12} onKeyUp={() => trigger("repassword")} {...register("password",{required:"שדה חובה"})}/>
+      <p className='form-input-error'>{errors.password?.message}</p>
+      </div>
         <button>התחבר/י</button>
     </form>
+</div>
 
     <div>
       <h2>עדיין לא משתמש רשום?</h2>

@@ -39,294 +39,256 @@ export default function UserContextProvider({children}) {
 
 
 
-const CheckHebrewLetters = (ch) => {
-  return ch >= 'א'&& ch <= 'ת'
-}
+// const CheckHebrewLetters = (ch) => {
+//   return ch >= 'א'&& ch <= 'ת'
+// }
 
-const  checkLetters = (ch) => {
+// const  checkLetters = (ch) => {
 
-  return ch >= 'a' && ch <= 'z';
-}
+//   return ch >= 'a' && ch <= 'z';
+// }
 
-const checkCapitalLetters = (ch) => {
+// const checkCapitalLetters = (ch) => {
 
-  return ch >= 'A' && ch <= 'Z';
-}
+//   return ch >= 'A' && ch <= 'Z';
+// }
 
-const checkNumbers = (ch) => {
-  return ch >= '0' && ch <= '9';
-}
+// const checkNumbers = (ch) => {
+//   return ch >= '0' && ch <= '9';
+// }
 
-const checkSymbols = (ch) => {
-  //[!@#$%^&*+`~'=?\|\]\[\(\)\-<>/]
-
-
-  return ch == '!' || ch == '@' || ch == '$' || ch == '#' || ch == '%' || ch == '+' || ch == '-' || ch == '^' || ch == '&' || ch == '*' || ch == '`' || ch == '~' || ch == '=' || ch == '<' || ch == '>' || ch  == '/' || ch == '(\)' || ch == '_' || ch == '|' || ch == '.' || ch == "'";
-}
+// const checkSymbols = (ch) => {
+//   //[!@#$%^&*+`~'=?\|\]\[\(\)\-<>/]
 
 
-const CalcAge = (value) =>{
-
-  let today = new Date(); // current date - recieved by the browser
-  let userBday = new Date(value.value) // user input birth date
-  let userAge = today.getFullYear() - userBday.getFullYear(); // rough calculation of age 
-  let currentMonth = today.getMonth();
-  let currentDay = today.getDate(); //gets the day of the month 
-
-  if( today.getMonth() - userBday.getMonth() < 0 || today.getMonth() - userBday.getMonth() == 0 && today.getDate() < userBday.getDate()){
-    userAge--;
-  }
-  console.log(userAge)
-  return userAge;
-
-}
-
-function CheckUserNameInput(target){
-  for(let i = 0; i <target.value.length; i++){
-    if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && checkNumbers(target.value[i]) == false && checkSymbols(target.value[i]) == false){
-      target.value = target.value.slice(0,i);
-      target.classList.add('border-red');
-    }
-    else{
-      target.classList.remove('border-red');
-    }
-
-  }
-
-  if(target.value.length <= 0 || target.value.length > 60){
-    //add an error message to the user for invalid input length
-    return false
-  }
-  else{
-    return true; //all chars not allowed have been deleted and the username length is valid
-  }
-}
+//   return ch == '!' || ch == '@' || ch == '$' || ch == '#' || ch == '%' || ch == '+' || ch == '-' || ch == '^' || ch == '&' || ch == '*' || ch == '`' || ch == '~' || ch == '=' || ch == '<' || ch == '>' || ch  == '/' || ch == '(\)' || ch == '_' || ch == '|' || ch == '.' || ch == "'";
+// }
 
 
-//deletes unapproved chars
-function CheckPasswordChars(target){
-    for(let i = 0; i <target.value.length; i++){
-    if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && checkNumbers(target.value[i]) == false && checkSymbols(target.value[i]) == false){
-      target.value = target.value.slice(0,i);
-      target.classList.add('border-red');
-    }
-    else{
-      target.classList.remove('border-red');
+// const CalcAge = (value) =>{
 
-    } 
+//   let today = new Date(); // current date - recieved by the browser
+//   let userBday = new Date(value.value) // user input birth date
+//   let userAge = today.getFullYear() - userBday.getFullYear(); // rough calculation of age 
+//   let currentMonth = today.getMonth();
+//   let currentDay = today.getDate(); //gets the day of the month 
+
+//   if( today.getMonth() - userBday.getMonth() < 0 || today.getMonth() - userBday.getMonth() == 0 && today.getDate() < userBday.getDate()){
+//     userAge--;
+//   }
+//   console.log(userAge)
+//   return userAge;
+
+// }
+
+// function CheckUserNameInput(target){
+//   for(let i = 0; i <target.value.length; i++){
+//     if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && checkNumbers(target.value[i]) == false && checkSymbols(target.value[i]) == false){
+//       target.value = target.value.slice(0,i);
+//       target.classList.add('border-red');
+//     }
+//     else{
+//       target.classList.remove('border-red');
+//     }
+
+//   }
+
+//   if(target.value.length <= 0 || target.value.length > 60){
+//     //add an error message to the user for invalid input length
+//     return false
+//   }
+//   else{
+//     return true; //all chars not allowed have been deleted and the username length is valid
+//   }
+// }
+
+
+// //deletes unapproved chars
+// function CheckPasswordChars(target){
+//     for(let i = 0; i <target.value.length; i++){
+//     if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && checkNumbers(target.value[i]) == false && checkSymbols(target.value[i]) == false){
+//       target.value = target.value.slice(0,i);
+//       target.classList.add('border-red');
+//     }
+//     else{
+//       target.classList.remove('border-red');
+
+//     } 
   
-  }
-}
+//   }
+// }
 
 
-//checks all password requirements
-function CheckPasswordValidity(target,reTarget){
+// //checks all password requirements
+// function CheckPasswordValidity(target,reTarget){
 
-  CheckPasswordChars(target) // another check for password chars
-  let isValidPassword;
-  let number = false, capitalLetter= false, symbol = false;
+//   CheckPasswordChars(target) // another check for password chars
+//   let isValidPassword;
+//   let number = false, capitalLetter= false, symbol = false;
 
-  for(let i = 0; i < target.value.length; i++){
-    if(checkCapitalLetters(target.value[i]) == true){
-      capitalLetter = true;
-    }
-    else if(checkNumbers(target.value[i]) == true){
-      number = true;
-    }
-    else if(checkSymbols(target.value[i]) == true){
-      symbol = true;
-    }
-  }
+//   for(let i = 0; i < target.value.length; i++){
+//     if(checkCapitalLetters(target.value[i]) == true){
+//       capitalLetter = true;
+//     }
+//     else if(checkNumbers(target.value[i]) == true){
+//       number = true;
+//     }
+//     else if(checkSymbols(target.value[i]) == true){
+//       symbol = true;
+//     }
+//   }
 
   
-  if(number == true && capitalLetter == true && symbol == true && target.value.length > 6 && target.value.length < 13){
-    target.classList.add('border-green');
-    target.classList.remove('border-red');
-    isValidPassword = true;
-  }
-  else{
-    target.classList.remove('border-green') // incase the user inserted a good password and then deleted chars (onKeyUp ignores backspace and delete keys)
-    target.classList.add('border-red');
-    isValidPassword = false;
-  }
+//   if(number == true && capitalLetter == true && symbol == true && target.value.length > 6 && target.value.length < 13){
+//     target.classList.add('border-green');
+//     target.classList.remove('border-red');
+//     isValidPassword = true;
+//   }
+//   else{
+//     target.classList.remove('border-green') // incase the user inserted a good password and then deleted chars (onKeyUp ignores backspace and delete keys)
+//     target.classList.add('border-red');
+//     isValidPassword = false;
+//   }
   
-  if(reTarget.value != ''){
-    CheckRePassword(reTarget,target) // visual check for the input border
-  }
+//   if(reTarget.value != ''){
+//     CheckRePassword(reTarget,target) // visual check for the input border
+//   }
 
-  return isValidPassword;
+//   return isValidPassword;
 
-}
+// }
 
-//checks if the passwords match:
-function CheckRePassword(target,password){
+// //checks if the passwords match:
+// function CheckRePassword(target,password){
 
-  if(target.value == '') return false;
+//   if(target.value == '') return false;
 
-  if(target.value != password.value){
-    console.log("passwords do not match");
-    target.classList.add('border-red');
-    target.classList.remove('border-green');
-    return false;
-  }
-  else{
-    console.log("passwords match");
-    target.classList.add('border-green');
-    target.classList.remove('border-red');
-    return true;
-  }
-}
+//   if(target.value != password.value){
+//     console.log("passwords do not match");
+//     target.classList.add('border-red');
+//     target.classList.remove('border-green');
+//     return false;
+//   }
+//   else{
+//     console.log("passwords match");
+//     target.classList.add('border-green');
+//     target.classList.remove('border-red');
+//     return true;
+//   }
+// }
 
-function CheckUserAge(target){
-  console.log("check age")
-  let age = CalcAge(target);
-    if( age >= 120 || age <= 0 || age == NaN){
-      return false;
-    }
-    else{
-      return true;
-    }
-}
-
-
-//checks if the city exists in the cities database (text input, the user can enter a fictional place)
-function CheckCity(target){
-  let city = target.value;
-  console.log(city)
-
-  for(let i = 0; i < cities.length; i++){
-    if(cities[i].שם_ישוב == city){
-      console.log("City FOUND")
-      return true
-    }
-  }
-  console.log("City NOT FOUND")
-  //@#add a message to the user that the city does not exist#@
-  return false;
-}
+// function CheckUserAge(target){
+//   console.log("check age")
+//   let age = CalcAge(target);
+//     if( age >= 120 || age <= 0 || age == NaN){
+//       return false;
+//     }
+//     else{
+//       return true;
+//     }
+// }
 
 
-//only letters (hebrew and english) **check only one language**
-function CheckNameChars(target){
-    for(let i = 0; i <target.value.length; i++){
-    if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && CheckHebrewLetters(target.value[i]) == false && target.value[i] != ' '){
-      target.value = target.value.slice(0,i);
-      target.classList.add('border-red');
-    }
-    else{
-      target.classList.remove('border-red');
-    } 
+// //checks if the city exists in the cities database (text input, the user can enter a fictional place)
+// function CheckCity(target){
+//   let city = target.value;
+//   console.log(city)
+
+//   for(let i = 0; i < cities.length; i++){
+//     if(cities[i].שם_ישוב == city){
+//       console.log("City FOUND")
+//       return true
+//     }
+//   }
+//   console.log("City NOT FOUND")
+//   //@#add a message to the user that the city does not exist#@
+//   return false;
+// }
+
+
+// //only letters (hebrew and english) **check only one language**
+// function CheckNameChars(target){
+//     for(let i = 0; i <target.value.length; i++){
+//     if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && CheckHebrewLetters(target.value[i]) == false && target.value[i] != ' '){
+//       target.value = target.value.slice(0,i);
+//       target.classList.add('border-red');
+//     }
+//     else{
+//       target.classList.remove('border-red');
+//     } 
 
     
-  }
-  return true; // after all unapproved characters are removed
-}
-
-
-//###DELETES EVERYTHING AFTER THE 2ND @###
-// deletes extra @ chars and hebrew chars:
-function CheckEmailChars(target){
-  let atChar = false;
-  for(let i = 0; i < target.value.length; i++){
-    if(target.value[i] == '@' || CheckHebrewLetters(target.value[i])){
-      if(target.value[i] == '@' && atChar == false){atChar = true;
-      }
-      //if hebrew or more than one @, deletes it
-      else{
-        target.value = target.value.slice(0,i);
-      }
-    }
-  }
-}
-
-function CheckEmailValidity(target){
-  CheckEmailChars(target); //making sure there's no extra @ 
-  if(target.value.endsWith('.com')){
-    target.classList.remove('border-red');
-    return true;
-  }
-  else{
-    target.classList.add('border-red');
-    alert("כתובת המייל יכולה להסתיים רק ב: '.com'")
-    // #add a designed warning to the user#
-  }
-}
-
-// checks that the street name is in hebrew without deleting spaces
-function CheckInputLanguage(target){
-    for (let i = 0; i < target.value.length; i++) {
-      if (target.value[i] < 'א' && target.value[i] != ' '|| target.value[i] > 'ת' && target.value[i] != ' '){
-        target.value = target.value.slice(0,i);
-        target.classList.add('border-red');
-       // alert('רק אותיות בעברית')
-      }
-      else{
-        target.classList.remove('border-red');
-      }
-
-      
-  }
-
-  return true; // after the invalid chars have been removed from the input
-}
-
-function CheckStreetNumber(target){
-  for(let i = 0; i < target.value.length; i++) {
-    if(checkNumbers(target.value[i]) == false){
-        target.value = target.value.slice(0,i);
-    }
-  }
-  if(target.value < 0 || target.value  == ''){
-    target.classList.add('border-red');
-    return false;
-  }
-  else{
-    target.classList.remove('border-red');
-    return true;
-  }
-}
-
-
-  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  //NO IMAGE CHECK OR SAVE~~!!!!!
-  //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-//   function CheckFormOnSubmition(e){
-//     console.log("CheckFormOnSubmition")
-//     e.preventDefault();
-//     if(CheckUserNameInput(usernameRef.current) && CheckPasswordValidity(passwordRef.current) && CheckRePassword(rePasswordRef.current) && CheckNameChars(firstnameRef.current) && CheckNameChars(lastnameRef.current) && CheckEmailValidity(emailRef.current) && CheckUserAge(bdateRef.current)&&CheckCity(cityRef.current) &&CheckInputLanguage(streetRef.current) && CheckStreetNumber(streetNumrRef.current)){
-//       console.log("valid form")
-//       RegisterNewUser();
-//     }
-//     //### add an eles which shows what is wrong with the form inputs to the user!!! ###
 //   }
+//   return true; // after all unapproved characters are removed
+// }
 
-//     function RegisterNewUser(){
-//         let newUser = {
-//         "username": usernameRef.current.value,
-//         "password": passwordRef.current.value,
-//         //insert img here;
-//         "firstname": firstnameRef.current.value,
-//         "lastname": lastnameRef.current.value,
-//         "email": emailRef.current.value,
-//         "birthdate": bdateRef.current.value,
-//         "city": cityRef.current.value,
-//         "street": streetRef.current.value,
-//         "streetNumber": streetNumrRef.current.value
+
+// //###DELETES EVERYTHING AFTER THE 2ND @###
+// // deletes extra @ chars and hebrew chars:
+// function CheckEmailChars(target){
+//   let atChar = false;
+//   for(let i = 0; i < target.value.length; i++){
+//     if(target.value[i] == '@' || CheckHebrewLetters(target.value[i])){
+//       if(target.value[i] == '@' && atChar == false){atChar = true;
 //       }
-//       console.log(newUser);
-//       if(FindUser(newUser.email) == undefined){
-//         console.log("New user added successfully")
-//         AddNewUser(newUser);
-//         navigation(`/login`)
+//       //if hebrew or more than one @, deletes it
+//       else{
+//         target.value = target.value.slice(0,i);
+//       }
+//     }
+//   }
+// }
+
+// function CheckEmailValidity(target){
+//   CheckEmailChars(target); //making sure there's no extra @ 
+//   if(target.value.endsWith('.com')){
+//     target.classList.remove('border-red');
+//     return true;
+//   }
+//   else{
+//     target.classList.add('border-red');
+//     alert("כתובת המייל יכולה להסתיים רק ב: '.com'")
+//     // #add a designed warning to the user#
+//   }
+// }
+
+// // checks that the street name is in hebrew without deleting spaces
+// function CheckInputLanguage(target){
+//     for (let i = 0; i < target.value.length; i++) {
+//       if (target.value[i] < 'א' && target.value[i] != ' '|| target.value[i] > 'ת' && target.value[i] != ' '){
+//         target.value = target.value.slice(0,i);
+//         target.classList.add('border-red');
+//        // alert('רק אותיות בעברית')
 //       }
 //       else{
-//         console.log("user already exists")
-//         //## message to the user about the email ##!!!!
+//         target.classList.remove('border-red');
 //       }
+
+      
 //   }
 
-  const [cities,SetCities] = useState([]);
+//   return true; // after the invalid chars have been removed from the input
+// }
+
+// function CheckStreetNumber(target){
+//   for(let i = 0; i < target.value.length; i++) {
+//     if(checkNumbers(target.value[i]) == false){
+//         target.value = target.value.slice(0,i);
+//     }
+//   }
+//   if(target.value < 0 || target.value  == ''){
+//     target.classList.add('border-red');
+//     return false;
+//   }
+//   else{
+//     target.classList.remove('border-red');
+//     return true;
+//   }
+// }
+
+
+
+const [cities,SetCities] = useState([]);
 
 async function LoadCities(){
   try {
@@ -346,6 +308,160 @@ async function LoadCities(){
 
 
 
+
+
+
+
+//NEW FORM FUNCTIONS______@#$$%^&*:
+
+const CheckHebrew = (value) =>{
+  return /[א-ת]/.test(value);
+}
+
+
+//checks special characters
+const CheckSpecialChar = (value) =>{
+  //  \p{L} ---> any unicode letter
+  //  \p{N} ---> any unicode digit
+  //  +/u --> flags the end of the regular expression and indicates it's to be treated as a unicode regular expression
+  
+  return /[^\p{L}\p{N}\s]+/u.test(value);
+}
+
+const CheckUpperCase = (value) =>{
+  return /[A-Z]/.test(value)
+}
+
+const CheckLowerCase = (value) =>{
+  return /[a-z]/.test(value);
+}
+
+const CheckNumber = (value) =>{
+  return /[0-9]/.test(value);
+}
+
+
+function CheckUsernameValidity(value){
+  if(CheckHebrew(value)) {
+    return "אותיות לועזיות בלבד";
+  }
+  if(value.length > 60){
+    return "עד 60 תווים בלבד"
+  }
+}
+
+
+function CheckPasswordValidity(value){
+  if(CheckHebrew(value)){
+    return "אותיות לועזיות מספרים ותווים מיוחדים בלבד"
+  }
+  else if(value.length < 7){
+    return"7 תווים לפחות"
+  }
+  else if(CheckSpecialChar(value) == false ||CheckUpperCase(value) == false|| CheckNumber(value) == false){
+    return "חובה לפחות אות גדולה אחת תו מיוחד ומספר"
+  }
+
+  else if(value.length > 12 ){
+      return "עד 12 תווים בלבד"
+  }
+}
+
+// does not work globally because of the "watch" method
+// function CheckPasswordsMatch(value,password){
+//   if(value != password){
+//     return "סיסמאות לא תואמות"
+//   }
+//   else{
+//     return true;
+//   }
+// }
+
+function CheckNameValidity(value){
+  const space = /[`\s`]/;
+  if(CheckSpecialChar(value)|| CheckNumber(value)){
+    return "אותיות בלבד"
+  }
+  else{
+    return true;
+  }
+}
+
+  function CheckEmailValidity(value){
+    if(CheckHebrew(value)) {
+      return "כתובת מייל חייבת לכלול רק אותיות באנגלית";
+    }
+    else if( value.split('@').length - 1 != 1){
+      return "תו @ אחד בלבד";
+
+    }
+    else if(value.endsWith('.com') == false){
+      return "סיומת .com בלבד";
+    }
+    else{
+    
+      return true; //checks the email address does not already exists in the database
+    } 
+}
+
+
+const CalcAge = (value) =>{
+
+  let today = new Date(); // current date - recieved by the browser
+  let userBday = new Date(value) // user input birth date
+  let userAge = today.getFullYear() - userBday.getFullYear(); // rough calculation of age 
+  let currentMonth = today.getMonth();
+  let currentDay = today.getDate(); //gets the day of the month 
+
+
+  //more precise calculation of the age taking into account the current month and day.
+  if( today.getMonth() - userBday.getMonth() < 0 || today.getMonth() - userBday.getMonth() == 0 && today.getDate() < userBday.getDate()){
+    userAge--;
+  }
+  console.log(userAge)
+  return userAge;
+}
+
+function CheckUserAge(value){
+  console.log("check age")
+  let age = CalcAge(value);
+    if( age >= 120 || age <= 0 || age == NaN){
+      console.log("age not valid")
+      return "תאריך לא תקין";
+    }
+    else{
+      return true;
+    }
+}
+
+
+function CheckCity(value){
+  //let city = value.value;
+  console.log(value)
+
+  for(let i = 0; i < cities.length; i++){
+    if(cities[i].שם_ישוב == value){
+      console.log("City FOUND")
+      return true
+    }
+  }
+  return "נא לבחור עיר מתוך הרשימה"
+}
+
+
+
+function CheckStreet(value){
+  if(CheckNumber(value)|| CheckUpperCase(value) || CheckLowerCase(value) || CheckSpecialChar(value))
+  {
+    return "רק אותיות בעברית"
+  }
+  else if(value.trim().length == 0){
+    return 'שדה חובה'
+  }
+  else{
+    return true;
+  }
+}
 
 
 
@@ -375,10 +491,15 @@ async function LoadCities(){
     }
 
 
-    const FindUser = (email) => {
+    const FindUserByEmail = (email) => {
         let user = users.find((u) => u.email === email);
         console.log(user)
-        return user;
+        if (user!= undefined) {
+          return 'כתובת מייל כבר קיימת'
+        }
+        else{
+          return true;
+        }
     }
 
     const Login = (username, password) => {
@@ -403,7 +524,9 @@ async function LoadCities(){
 
     //const value = {users,AddNewUser,FindUser,Login};
 
-    const value = {users,FindUser,Login,AddNewUser,CheckUserNameInput,CalcAge,CheckPasswordChars,CheckPasswordValidity,CheckRePassword,CheckUserAge,CheckCity,CheckNameChars,CheckEmailChars,CheckEmailValidity,CheckInputLanguage,CheckStreetNumber,LoadCities,cities,loggedUser,DeleteUser};
+    // const value = {users,FindUser,Login,AddNewUser,CheckUserNameInput,CalcAge,CheckPasswordChars,CheckPasswordValidity,CheckRePassword,CheckUserAge,CheckCity,CheckNameChars,CheckEmailChars,CheckEmailValidity,CheckInputLanguage,CheckStreetNumber,LoadCities,cities,loggedUser,DeleteUser};
+
+    const value = {users,SetUsers,cities,SetCities,LoadCities,FindUserByEmail,Login,AddNewUser,DeleteUser,CheckHebrew,CheckSpecialChar,CheckUpperCase,CheckLowerCase,CheckNumber,CheckUsernameValidity,CheckPasswordValidity,CheckNameValidity,CheckEmailValidity,CalcAge,CheckUserAge,CheckCity,CheckStreet,loggedUser,SetLoggedUser}
 
     return (
         <UserContext.Provider value={value}>

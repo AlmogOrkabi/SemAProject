@@ -12,7 +12,7 @@
   direction: rtl;
 }
 
-.form {
+/* .form {
   width: 50%;
   padding: 2rem;
 }
@@ -34,11 +34,11 @@
 
   outline: 3px solid green;
   outline-offset: -1.5px;
-}
+} */
 
 
 .user-table{
-  margin: 1rem;
+  margin: 1.5em;
   text-align: right;
   /* border: solid 3px rgba(119, 136, 153, 0.39); */
   border-radius: 5px;
@@ -63,7 +63,8 @@ line-height: 1.7rem;
 
 .user-table img{
   margin-top: 5%;
-  max-width: 70%;
+  max-width: 50%;
+  min-height: 4rem;
   min-width: 4rem;
   height: auto;
   border-radius: 50%;

@@ -12,14 +12,17 @@ import {FaEnvelope,FaMapMarkerAlt,FaBirthdayCake} from 'react-icons/fa';
 export default function Profile() {
     const { users, loggedUser } = useContext(UserContext);
 
-    const [user, SetUser] = useState({});
+    // const [user, SetUser] = useState({});
 
     const navigation = useNavigate();
 
     useEffect(() => {
         console.log("Profile");
-        SetUser(users.find((u) => u.username == username)?.username);
-        console.log(user)
+        console.log(loggedUser);
+        if (loggedUser == undefined || loggedUser.username != username) {
+            alert("use not logged in")
+            navigation(`/login`);
+        }
 
     }, [])
 

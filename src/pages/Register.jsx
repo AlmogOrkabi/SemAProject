@@ -1,409 +1,192 @@
-import React from 'react'
-import { useState,useEffect,useRef, useContext } from 'react';
-import { UserContext } from '../contexts/UserContext.jsx';
-import { useNavigate } from 'react-router-dom'
+import React, {useContext,useState,useEffect,useRef} from 'react'
+import { UserContext } from '../contexts/UserContext'
+import { useParams,useNavigate } from 'react-router-dom';
+import {useForm} from 'react-hook-form';
 
 export default function Register() {
 
-//const {AddNewUser,users,FindUser} = useContext(UserContext)
 
-const {FindUser,AddNewUser,CheckUserNameInput,CalcAge,CheckPasswordChars,CheckPasswordValidity,CheckRePassword,CheckUserAge,CheckCity,CheckNameChars,CheckEmailChars,CheckEmailValidity,CheckInputLanguage,CheckStreetNumber,LoadCities,cities} = useContext(UserContext)
+    const {users,SetUsers,cities,SetCities,LoadCities,FindUserByEmail,Login,AddNewUser,DeleteUser,CheckHebrew,CheckSpecialChar,CheckUpperCase,CheckLowerCase,CheckNumber,CheckUsernameValidity,CheckPasswordValidity,CheckNameValidity,CheckEmailValidity,CalcAge,CheckUserAge,CheckCity,CheckStreet} = useContext(UserContext)
+    const navigation = useNavigate();
+    const {username} = useParams();
+   // const [user,SetUser] = useState({});
+    const {register,handleSubmit,formState:{errors},watch, trigger} = useForm({mode:"all"});
 
-const navigation = useNavigate();
+    useEffect(()=>{
+        LoadCities();
+    },[])
 
-useEffect(() => {
-  LoadCities();
 
-},[]);
+    const ValidateForm = (data) =>{
 
+        console.log(data);
 
+        CreateNewUser(data);
 
-
-
-
-//const [cities,SetCities] = useState([]);
-
-const [image,SetImage] = useState([]);
-
-const usernameRef = useRef();
-const passwordRef = useRef();
-const rePasswordRef = useRef();
-const imageRef = useRef();
-const firstnameRef = useRef();
-const lastnameRef = useRef();
-const emailRef = useRef();
-const bdateRef = useRef();
-const cityRef = useRef();
-const streetRef = useRef();
-const streetNumrRef = useRef();
-
-
-
-
-
-
-
-// const CheckHebrewLetters = (ch) => {
-//   return ch >= 'א'&& ch <= 'ת'
-// }
-
-// const  checkLetters = (ch) => {
-
-//   return ch >= 'a' && ch <= 'z';
-// }
-
-// const checkCapitalLetters = (ch) => {
-
-//   return ch >= 'A' && ch <= 'Z';
-// }
-
-// const checkNumbers = (ch) => {
-//   return ch >= '0' && ch <= '9';
-// }
-
-// const checkSymbols = (ch) => {
-//   //[!@#$%^&*+`~'=?\|\]\[\(\)\-<>/]
-
-
-//   return ch == '!' || ch == '@' || ch == '$' || ch == '#' || ch == '%' || ch == '+' || ch == '-' || ch == '^' || ch == '&' || ch == '*' || ch == '`' || ch == '~' || ch == '=' || ch == '<' || ch == '>' || ch  == '/' || ch == '(\)' || ch == '_' || ch == '|' || ch == '.' || ch == "'";
-// }
-
-
-// const CalcAge = (value) =>{
-
-//   let today = new Date(); // current date - recieved by the browser
-//   let userBday = new Date(value.value) // user input birth date
-//   let userAge = today.getFullYear() - userBday.getFullYear(); // rough calculation of age 
-//   let currentMonth = today.getMonth();
-//   let currentDay = today.getDate(); //gets the day of the month 
-
-//   if( today.getMonth() - userBday.getMonth() < 0 || today.getMonth() - userBday.getMonth() == 0 && today.getDate() < userBday.getDate()){
-//     userAge--;
-//   }
-//   console.log(userAge)
-
-// }
-
-// function CheckUserNameInput(target){
-//   for(let i = 0; i <target.value.length; i++){
-//     if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && checkNumbers(target.value[i]) == false && checkSymbols(target.value[i]) == false){
-//       target.value = target.value.slice(0,i);
-//       target.classList.add('border-red');
-//     }
-//     else{
-//       target.classList.remove('border-red');
-//     }
-
-//   }
-
-//   if(target.value.length <= 0 || target.value.length > 60){
-//     //add an error message to the user for invalid input length
-//     return false
-//   }
-//   else{
-//     return true; //all chars not allowed have been deleted and the username length is valid
-//   }
-// }
-
-
-// //deletes unapproved chars
-// function CheckPasswordChars(target){
-//     for(let i = 0; i <target.value.length; i++){
-//     if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && checkNumbers(target.value[i]) == false && checkSymbols(target.value[i]) == false){
-//       target.value = target.value.slice(0,i);
-//       target.classList.add('border-red');
-//     }
-//     else{
-//       target.classList.remove('border-red');
-
-//     } 
-  
-//   }
-// }
-
-
-// //checks all password requirements
-// function CheckPasswordValidity(target){
-
-//   CheckPasswordChars(target) // another check for password chars
-//   let isValidPassword;
-//   let number = false, capitalLetter= false, symbol = false;
-
-//   for(let i = 0; i < target.value.length; i++){
-//     if(checkCapitalLetters(target.value[i]) == true){
-//       capitalLetter = true;
-//     }
-//     else if(checkNumbers(target.value[i]) == true){
-//       number = true;
-//     }
-//     else if(checkSymbols(target.value[i]) == true){
-//       symbol = true;
-//     }
-//   }
-
-  
-//   if(number == true && capitalLetter == true && symbol == true && target.value.length > 6 && target.value.length < 13){
-//     target.classList.add('border-green');
-//     target.classList.remove('border-red');
-//     isValidPassword = true;
-//   }
-//   else{
-//     target.classList.remove('border-green') // incase the user inserted a good password and then deleted chars (onKeyUp ignores backspace and delete keys)
-//     target.classList.add('border-red');
-//     isValidPassword = false;
-//   }
-  
-//   if(rePasswordRef.current.value != ''){
-//     CheckRePassword(rePasswordRef.current) // visual check for the input border
-//   }
-
-//   return isValidPassword;
-
-// }
-
-// //checks if the passwords match:
-// function CheckRePassword(target){
-
-//   if(target.value == '') return false;
-
-//   if(target.value != passwordRef.current.value){
-//     console.log("passwords do not match");
-//     target.classList.add('border-red');
-//     target.classList.remove('border-green');
-//     return false;
-//   }
-//   else{
-//     console.log("passwords match");
-//     target.classList.add('border-green');
-//     target.classList.remove('border-red');
-//     return true;
-//   }
-// }
-
-// function CheckUserAge(target){
-//   console.log("check age")
-//   let age = CalcAge(target);
-//     if( age >= 120 || age <= 0 || age == NaN){
-//       return false;
-//     }
-//     else{
-//       return true;
-//     }
-// }
-
-
-// //checks if the city exists in the cities database (text input, the user can enter a fictional place)
-// function CheckCity(target){
-//   let city = target.value;
-//   console.log(city)
-
-//   for(let i = 0; i < cities.length; i++){
-//     if(cities[i].שם_ישוב == city){
-//       console.log("City FOUND")
-//       return true
-//     }
-//   }
-//   console.log("City NOT FOUND")
-//   //@#add a message to the user that the city does not exist#@
-//   return false;
-// }
-
-
-// //only letters (hebrew and english) **check only one language**
-// function CheckNameChars(target){
-//     for(let i = 0; i <target.value.length; i++){
-//     if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && CheckHebrewLetters(target.value[i]) == false){
-//       target.value = target.value.slice(0,i);
-//       target.classList.add('border-red');
-//     }
-//     else{
-//       target.classList.remove('border-red');
-//     } 
-
-    
-//   }
-//   return true; // after all unapproved characters are removed
-// }
-
-
-// //###DELETES EVERYTHING AFTER THE 2ND @###
-// // deletes extra @ chars and hebrew chars:
-// function CheckEmailChars(target){
-//   let atChar = false;
-//   for(let i = 0; i < target.value.length; i++){
-//     if(target.value[i] == '@' || CheckHebrewLetters(target.value[i])){
-//       if(target.value[i] == '@' && atChar == false){atChar = true;
-//       }
-//       //if hebrew or more than one @, deletes it
-//       else{
-//         target.value = target.value.slice(0,i);
-//       }
-//     }
-//   }
-// }
-
-// function CheckEmailValidity(target){
-//   CheckEmailChars(target); //making sure there's no extra @ 
-//   if(target.value.endsWith('.com')){
-//     target.classList.remove('border-red');
-//     return true;
-//   }
-//   else{
-//     target.classList.add('border-red');
-//     alert("כתובת המייל יכולה להסתיים רק ב: '.com'")
-//     // #add a designed warning to the user#
-//   }
-// }
-
-// // checks that the street name is in hebrew without deleting spaces
-// function CheckInputLanguage(target){
-//     for (let i = 0; i < target.value.length; i++) {
-//       if (target.value[i] < 'א' && target.value[i] != ' '|| target.value[i] > 'ת' && target.value[i] != ' '){
-//         target.value = target.value.slice(0,i);
-//         target.classList.add('border-red');
-//        // alert('רק אותיות בעברית')
-//       }
-//       else{
-//         target.classList.remove('border-red');
-//       }
-
-//       return true; // after the invalid chars have been removed from the input
-//   }
-// }
-
-// function CheckStreetNumber(target){
-//   for(let i = 0; i < target.value.length; i++) {
-//     if(checkNumbers(target.value[i]) == false){
-//         target.value = target.value.slice(0,i);
-//     }
-//   }
-//   if(target.value < 0 || target.value  == ''){
-//     target.classList.add('border-red');
-//     return false;
-//   }
-//   else{
-//     target.classList.remove('border-red');
-//     return true;
-//   }
-// }
-
-
-
-
-  function CheckFormOnSubmition(e){
-    console.log("CheckFormOnSubmition")
-    e.preventDefault();
-    if(CheckUserNameInput(usernameRef.current) && CheckPasswordValidity(passwordRef.current,rePasswordRef.current) && CheckRePassword(rePasswordRef.current,passwordRef.current) && CheckNameChars(firstnameRef.current) && CheckNameChars(lastnameRef.current) && CheckEmailValidity(emailRef.current) && CheckUserAge(bdateRef.current)&&CheckCity(cityRef.current) &&CheckInputLanguage(streetRef.current) && CheckStreetNumber(streetNumrRef.current)){
-      console.log("valid form")
-      RegisterNewUser();
-    }
-    //### add an eles which shows what is wrong with the form inputs to the user!!! ###
-  }
-
-    function RegisterNewUser(){
-        let newUser = {
-        "username": usernameRef.current.value,
-        "password": passwordRef.current.value,
-        "image": image,
-        "firstname": firstnameRef.current.value,
-        "lastname": lastnameRef.current.value,
-        "email": emailRef.current.value,
-        "birthdate": bdateRef.current.value,
-        "city": cityRef.current.value,
-        "street": streetRef.current.value,
-        "streetNumber": streetNumrRef.current.value
-      }
-      console.log(newUser);
-      if(FindUser(newUser.email) == undefined){
-        console.log("New user added successfully")
-        AddNewUser(newUser);
         navigation(`/login`)
-      }
-      else{
-        console.log("user already exists")
-        //## message to the user about the email ##!!!!
-      }
+    }
+
+// does not work globally because of the "watch" method
+function CheckPasswordsMatch(value){
+  if(value != watch("password")){
+    return "סיסמאות לא תואמות"
   }
+  else{
+    return true;
+  }
+}
+
+
+    function CreateNewUser(data){
+        let user ={
+                username : data.username,
+                password : data.password,
+                image : URL.createObjectURL(data.image[0]),
+                firstname : data.firstname,
+                lastname : data.lastname,
+                email : data.email,
+                birthdate : data.birthdate,
+                city : data.city,
+                street : data.street,
+                streetnumber : data.streetnumber
+        };
+        AddNewUser(user);
+    }
 
 
 
-// async function LoadCities(){
-//   try {
-//     let res = await fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=5c78e9fa-c2e2-4771-93ff-7f400a12f7ba&limit=1567`);
-//     // without limit will only get the first 100 cities (out of 1267)
-//     let data = await res.json();
-//     console.log(data)
-//     data = data.result.records
-//     console.log(data)
-//     SetCities(data)
-//     console.log(cities)
-//   } catch (error) {
-//     console.error(error);
-//   }
-
-// }
-
-  return (
+return (
     <>
-    <h1>Register Page</h1>
-    
-    <form action="" onSubmit={(e) => CheckFormOnSubmition(e)} className='form register-form flex-column'>
 
-        <label htmlFor="register-username">שם משתמש:</label>
-        <input type="text" id='register-username' name='username' ref={usernameRef} required   maxLength={60}  onKeyUp={(event) => CheckUserNameInput(event.target)} />
-        {/* pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*?[!@#$%^&*+`~'=?\|\]\[\(\)\-<>/])" */}
+    <h1>טופס הרשמה:</h1>
 
+    <div className='form-container'>
 
-        <label htmlFor="register-password">סיסמה:</label>
-        {/* pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*?[!@#$%^&*+`~'=?\|\_]\[\(\)\-<>/]).{7,12}" */}
-        <input type="password" name="password" id="register-password" ref={passwordRef} title='בין 7 ל 12 תווים, לפחות אות גדולה אחת, תו מיוחד ומספר' minLength={7} maxLength={12} onKeyUp={(e) => CheckPasswordChars(e.target)}   onBlur={(e) => CheckPasswordValidity(e.target,rePasswordRef.current)} required />
+      <form action="" onSubmit={handleSubmit(ValidateForm)}>
 
-        <label htmlFor="register-password-confirmation">אימות סיסמה:</label>
-        <input type="password" name="password" id="register-password-confirmation" ref={rePasswordRef} title='בין 7 ל 12 תווים, לפחות אות גדולה אחת, תו מיוחד ומספר' minLength={7} maxLength={12} onKeyUp={(e) => CheckPasswordChars(e.target)} onBlur = {(e) => CheckRePassword(e.target,passwordRef.current)} required />
-
-
-        <label htmlFor="register-image">תמונה:</label>
-        <input type="file" name="user-image" id="register-image" accept='image/jpeg, image/jpg' ref={imageRef} onChange={(e) => SetImage(URL.createObjectURL(e.target.files[0]))} required />
+      <div className="form-group">
+        <label htmlFor="username">שם משתמש:</label>
+      <input type="text" name="username" id="username" maxLength={60} {...register("username",{required:"שדה חובה",
+    validate:CheckUsernameValidity})}/> 
+      {/* #####  added maxLenght to prevent the user from entering more than 60 chars ##### */}
+      <p className='form-input-error'>{errors.username?.message}</p>
+      </div>
 
 
+      <div className="form-group">
+        <label htmlFor="password">סיסמה:</label>
+      <input type="password" name="password" id="password" maxLength={12} onKeyUp={() => trigger("repassword")} {...register("password",{required:"שדה חובה",
+        validate:CheckPasswordValidity})}/>
+      <p className='form-input-error'>{errors.password?.message}</p>
+      </div>
+
+
+
+      <div className="form-group">
+        <label htmlFor="repassword">ווידוא סיסמה:</label>
+      <input type="password" name="repassword" id="repassword" maxLength={12} {...register("repassword",{required:"שדה חובה",
+        validate:CheckPasswordsMatch})}/>
+      <p className='form-input-error'>{errors.repassword?.message}</p>
+      </div>
+
+
+      <div className="form-group">
+        <label htmlFor="image">תמונה:</label>
+      <input type="file" name="image" id="image"  accept='image/jpeg, image/jpg' {...register("image",{
+        required:"שדה חובה"
+        })}/>
+      <p className='form-input-error'>{errors.image?.message}</p>
+      </div>
+
+
+
+
+      <div className="form-group">
         <label htmlFor="first-name">שם פרטי:</label>
-        <input type="text" name="first-name" id="first-name" ref={firstnameRef} onKeyUp={(e) => CheckNameChars(e.target)} required />
+      <input type="text" name="first-name" id="first-name" {...register("firstname",
+        {required:"שדה חובה",
+        validate:CheckNameValidity})}/> 
+      <p className='form-input-error'>{errors.firstname?.message}</p>
+      </div>
 
+
+      <div className="form-group">
         <label htmlFor="last-name">שם משפחה:</label>
-        <input type="text" name="last-name" id="last-name" ref={lastnameRef} onKeyUp={(e) => CheckNameChars(e.target)} required />
+      <input type="text" name="last-name" id="last-name" {...register("lastname",
+        {required:"שדה חובה",
+        validate:CheckNameValidity})}/> 
+      <p className='form-input-error'>{errors.lastname?.message}</p>
+      </div>
 
 
 
-        <label htmlFor="register-email">כתובת דוא"ל:</label>
-        <input type="email" name="user_email" id="register-email" ref={emailRef} pattern='.+@[a-z]+\.com'  onKeyUp={(e) => CheckEmailChars(e.target)} onBlur={(e) => CheckEmailValidity(e.target)} required />
+      <div className="form-group">
+        <label htmlFor="new-email">כתובת מייל:</label>
+        <input type="text" name="email" id="new-email" {...register("newemail",{required:"שדה חובה",
+        validate:{CheckEmailValidity,FindUserByEmail}
+        })}/>
+      <p className='form-input-error'>{errors.newemail?.message}</p>
+      </div>
 
-        <label htmlFor="register-birth-date">תאריך לידה:</label>
-        <input type="date" name="birth-date" id="register-birth-date" ref={bdateRef} min="1923-01-01" max="2023-01-01"  onBlur={(e) => CalcAge(e.target)} required />
 
 
-        <label htmlFor="register-city">עיר מגורים:</label>
-        <input type="text" name="city" id="register-city" ref={cityRef} list='city-list' required/>
-        <datalist id='city-list'>
+      <div className="form-group">
+        <label htmlFor="birth-date">תאריך לידה:</label>
+        <input type="date" name="birthdate" id="birth-date" min="1920-01-01" {...register("birthdate",
+        {required:"שדה חובה",
+        validate:CheckUserAge})}/> 
+        <p className='form-input-error'>{errors.birthdate?.message}</p>
+      </div>
+
+
+      <div className="form-group"> 
+        <label htmlFor="city">עיר מגורים:</label>
+        <input type="text" name="city" id="city" list='city-list' {...register("city",
+        {required:"שדה חובה",
+        validate:CheckCity})}/>
+        <datalist id='city-list' >
           {
-            cities.map((city) => <option key = {city.שם_ישוב} value={city.שם_ישוב}></option>)
+            cities.map((city) => <option key = {city.שם_ישוב} value={city.שם_ישוב} ></option>)
           }
         </datalist>
+        <p className='form-input-error'>{errors.city?.message}</p>
+      </div>
 
-          <label htmlFor="register-street">רחוב:</label>
-          <input type="text" name="user-street" id="register-street" ref={streetRef}  onKeyUp={(event) => CheckInputLanguage(event.target)} required />
 
-          <label htmlFor="register-street-number">מספר בית:</label>
-          <input type="number" id="register-street-number" name="user-street-number" ref={streetNumrRef} min={1} onChange={(e) => CheckStreetNumber(e.target)} required/>
+      <div className="form-group">
+        <label htmlFor="street">רחוב:</label>
+      <input type="text" name="street" id="street" {...register("street",
+        {required:"שדה חובה",
+        validate:CheckStreet})}/> 
+      <p className='form-input-error'>{errors.street?.message}</p>
+      </div>
 
-        <button type='sumbit'>הרשם</button>
+
+      <div className="form-group">
+        <label htmlFor="street-number">מספר רחוב:</label>
+      <input type="number" name="street-number" id="street-number" {...register("streetnumber",
+        {required:"שדה חובה",
+        pattern:{
+          value: /^[0-9]*$/,
+            message: "נא להזין מספר חיובי בלבד"
+        },
+        min:{
+          value: 1,
+          message: "נא להזין מספר  חיובי בלבד"
+
+        }
+        })}/> 
+      <p className='form-input-error'>{errors.streetnumber?.message}</p>
+      </div>
+
+
+
+      <button>הרשם</button>
 
     </form>
-
-    <div>
-      <h2>כבר רשום?</h2>
-      <button onClick={(e) =>navigation('/login')}>לחץ כאן להחברות</button>
     </div>
-    
+
+
     </>
-  )
+)
 }
