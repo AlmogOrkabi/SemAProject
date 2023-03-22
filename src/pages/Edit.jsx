@@ -157,6 +157,8 @@ const CalcAge = (value) =>{
   let currentMonth = today.getMonth();
   let currentDay = today.getDate(); //gets the day of the month 
 
+
+  //more precise calculation of the age taking into account the current month and day.
   if( today.getMonth() - userBday.getMonth() < 0 || today.getMonth() - userBday.getMonth() == 0 && today.getDate() < userBday.getDate()){
     userAge--;
   }
