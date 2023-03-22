@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 export default function Navbar() {
   return (
     <>
-    <nav aria-label='main navigation'>
-    <Link className='link' to='/' >Home</Link>
-        <Link className='link' to='/login'>Login</Link>
-        <Link className='link' to='register'>Register</Link>
+    <nav className='navbar' aria-label='main navigation'>
+    <Link className='link nav-link' to='/' >דף הבית</Link>
+        <Link className='link nav-link' to='/login'>התחברות</Link>
+        <Link className='link nav-link' to='register'>הרשמה</Link>
     </nav>
     </>
   )

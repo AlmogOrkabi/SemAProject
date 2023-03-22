@@ -45,6 +45,12 @@ input[type="file"]{
 
 
 /*_______NAVBAR + LINKS_______*/
+.navbar{
+  font-size: 0.8em;
+}
+.nav-link{
+  margin-inline: 0.5em;
+}
 
 .link{
   text-decoration: none;
