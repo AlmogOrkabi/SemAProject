@@ -1,41 +1,66 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&display=swap');
+
+
+
 *,
 *::before,
 ::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: Verdana, sans-serif;
+  font-family: 'Fredoka' ,cursive ,Verdana, sans-serif;
   /* font-family: 'Courier New', monospace; */
 }
 
 * {
   direction: rtl;
 }
+/*colors:
+#CEDFCF
+#E6EFE7
+#C2E5FE
+#E9F6FF
+#F5FBEF
+#A2C8CD
+#BDD8DB
+#E5EFF1
 
-/* .form {
-  width: 50%;
-  padding: 2rem;
+
+*/
+body{
+/* background-color: #ececec; */
+/* background-color: #eeffe4; */
+/* background-color: #e4fff7; */
+/* background-color: #e4ffed; */
+/* background-color: #e9fdeb; ^^^^ */
+/* background-color: rgb(240,246,252); */
+background-color: #E0F6F4;
+font-size: clamp(0.6rem,2vw,1.3rem)
 }
 
-.flex-column {
-  display: flex;
-  flex-direction: column;
+input[type="file"]{
+  display: none;
 }
 
 
-.border-red {
+/*_______NAVBAR + LINKS_______*/
 
-  outline: 3px solid red;
-  outline-offset: -1.5px;
+.link{
+  text-decoration: none;
+  color: black;
+}
+
+.link:active,.link:hover{
+  color: rgba(0, 0, 0, 0.534);
+}
+
+.form-link:active,.form-link:hover{
+  color: rgb(12, 175, 12);
 }
 
 
-.border-green {
-
-  outline: 3px solid green;
-  outline-offset: -1.5px;
-} */
-
+/*_________USER COMPONENT_________*/
 
 .user-table{
   margin: 1.5em;
@@ -106,70 +131,144 @@ gap: 0.8em;
 }
 
 /*________NEW FORM_________*/
+
+
+.title{
+  text-align: center;
+  margin-block: 5%;
+  font-size: 1.5em;
+  letter-spacing: 0.2em;
+  text-decoration: underline;
+  text-underline-offset: 0.5em;
+  text-decoration-thickness: 0.02em;
+  text-shadow: 0px 3px 9px #9c9393;
+}
+
 .form-container{
-  margin-inline: 10%;
-  margin-block: 10%;
+  display: flex;
+  flex-direction: column;
+  margin-inline: auto;
+  margin-block: 5%;
   max-width: 50%;
+  box-shadow: 0px 0px 13px 3px rgba(105, 105, 105, 0.342);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.527);
+  align-items: center;
+  min-width: fit-content;
+  /* padding-block: 5%; */
 }
 
 .form-container input{
-  max-width: 50%;
+  max-width: 80%;
+  border-color: rgb(211, 211, 211);
+  border-style: solid;
+  border-width: 2px;
 }
 
+
+.form-container button,
+.form-group{
+  width: fit-content;
+  font-size: 0.9rem;
+  color: rgb(114, 114, 114);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  padding-inline: 3%;
+}
 input:focus{
   outline-color: rgba(0, 26, 255, 0.712);
 }
 
-.form-group{
-  display: flex;
-  flex-direction: column;
-}
 .form-input-error{
   color: red;
-  font-size: 0.65rem;
+  font-size: 0.6em;
+}
+
+.img-icon{
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.img-input{
+  margin: 0;
+  cursor: pointer;
 }
 
 /*_____PROFILE PAGE________*/
+
+.profile-container{
+  display: flex;
+  padding: 1.5em;
+  border: 1px black solid;
+  /* margin-inline: 3em; */
+  margin-block: 3em;
+  /* box-shadow: 10px 10px 10px 10px dimgrey; */
+  /* box-shadow: 0px 0px 30px 12px rgba(105,105,105,0.4); */
+  /* box-shadow: 0px 0px 30px 12px rgba(105,105,105,0.56); */
+  background-color: rgba(255, 255, 255, 0.404);
+  box-shadow: 0px 0px 13px 11px rgba(105,105,105,0.39);
+  width: fit-content;
+  margin-inline: auto;
+}
+
+.user-img{
+  max-width: 50%;
+  max-height: 12em;
+  border-radius: 5%;
+  box-shadow: 0 5px 10px dimgrey;
+  min-width: 30%;
+}
 
 
 .profile-title{
   text-align: center;
   padding-top: 10%;
-  text-shadow: 0px 3px 9px #696969;
+  text-shadow: 0px 3px 9px #69696994;
 }
 
-img#pro-img {
-  max-width: 100px;
-  border-radius: 50%;
-  box-shadow: 0 5px 10px dimgrey;
-  min-width: 30%;
+
+
+
+.details{
+  margin-right:10%;
+  align-self: center;
+  
 }
-div#box-pro1 {
-  display: flex;
+
+/* div#box-outline {
   padding: 20px;
-  border: 1px black solid;
-  margin-inline: 20%;
-  margin-block: 5%;
-  box-shadow: 10px 10px 10px 10dimgrey;
- }
- div#box-outline {
-  padding: 20px;
-}
-button#logoff {
-  padding: 2px;
+} */
+
+.profile-btn{
   color: white;
+  /* padding: 2px; */
+  padding: 0.3em;
+  margin: 0.3em;
+  /* font-family: cursive; */
+  font-size: inherit;
+}
+
+
+#logoff {
   background-color: red;
-  font-family: cursive;
 }
-button#edit {
-  padding: 2px;
-  color: white;
+
+#logoff:hover{
+  background-color: rgba(255, 0, 0, 0.445);
+}
+
+#edit {
   background-color: rgb(128, 128, 128);
-  font-family: cursive;
 }
-p#pro-name {
-  font-size: 20px;
+
+#edit:hover {
+  background-color: rgba(128, 128, 128, 0.644);
+}
+
+.user-name {
+  font-size: 1.5em;
 }
 .profile-container p {
-  padding: 2px;
+  padding-block: 5px;
 }

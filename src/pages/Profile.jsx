@@ -12,13 +12,14 @@ import {FaEnvelope,FaMapMarkerAlt,FaBirthdayCake} from 'react-icons/fa';
 export default function Profile() {
     const { users, loggedUser } = useContext(UserContext);
 
-    // const [user, SetUser] = useState({});
 
     const navigation = useNavigate();
 
     useEffect(() => {
         console.log("Profile");
         console.log(loggedUser);
+
+        //checks the global variable logged user which is being assigned a user at the login page, if it is empty, sends the user to the login page;
         if (loggedUser == undefined || loggedUser.username != username) {
             alert("use not logged in")
             navigation(`/login`);
@@ -37,13 +38,14 @@ export default function Profile() {
         <>
             <h1 className='profile-title' id='pro-title'>Welcome Back {loggedUser.username}</h1>
             <div className='profile-container' id='box-pro1'>
-            <img id='pro-img' src={loggedUser.image} alt="" />
-            <div id='box-outline'>
-            <p id='pro-name'>{loggedUser.firstname} {loggedUser.lastname}</p>
+            <img className='user-img' src={loggedUser.image} alt="" />
+            <div className='details' id='box-outline'>
+            <p className='user-name' id='pro-name'>{loggedUser.firstname} {loggedUser.lastname}</p>
             <p><FaEnvelope/>{loggedUser.email}</p>
             <p><FaMapMarkerAlt/> {loggedUser.street} {loggedUser.streetNumber}, {loggedUser.city}</p>
             <p id='pro-birthday'>< FaBirthdayCake />{loggedUser.birthdate}</p>
-            <button id='logoff' onClick={(e) =>navigation('/')}>Log Off</button> <button id='edit' onClick={(e) => navigation(`/edit/${loggedUser.username}`)}>Edit</button>
+            <button className='profile-btn' id='logoff' onClick={(e) =>navigation('/')}>Log Off</button> 
+            <button  className='profile-btn' id='edit' onClick={(e) => navigation(`/edit/${loggedUser.username}`)}>Edit</button>
             <div id='buttons'></div>    
             </div>
         </div>

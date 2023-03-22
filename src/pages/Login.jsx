@@ -3,6 +3,8 @@ import { useRef,useEffect, useContext } from 'react'
 import { UserContext } from '../contexts/UserContext.jsx';
 import { useNavigate } from 'react-router-dom'
 import {useForm} from 'react-hook-form';
+import { Link } from 'react-router-dom';
+
 
 export default function Login() {
 
@@ -120,8 +122,9 @@ const {users,Login,CheckUsernameValidity,CheckPasswordValidity,loggedUser,SetLog
   
   return (
     <>
-    <h1>Login Page</h1>
+
 <div className="form-container">
+      <h1 className='title'>התחברות</h1>
           <form onSubmit={handleSubmit(UserLogin)}>
       <div className="form-group">
         <label htmlFor="username">שם משתמש:</label>
@@ -139,12 +142,8 @@ const {users,Login,CheckUsernameValidity,CheckPasswordValidity,loggedUser,SetLog
       </div>
         <button>התחבר/י</button>
     </form>
+<p>עדיין לא משתמש רשום? <Link className='form-link link' to='/register'>הרשם עכשיו!</Link></p>
 </div>
-
-    <div>
-      <h2>עדיין לא משתמש רשום?</h2>
-      <button onClick={(e) =>navigation('/register')}>לחץ כאן להרשמה</button>
-    </div>
     </>
   )
 }

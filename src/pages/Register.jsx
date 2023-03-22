@@ -2,6 +2,7 @@ import React, {useContext,useState,useEffect,useRef} from 'react'
 import { UserContext } from '../contexts/UserContext'
 import { useParams,useNavigate } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
+import {AiFillFileImage} from 'react-icons/ai'
 
 export default function Register() {
 
@@ -58,15 +59,13 @@ function CheckPasswordsMatch(value){
 return (
     <>
 
-    <h1>טופס הרשמה:</h1>
-
     <div className='form-container'>
-
+<h1 className='title'>טופס הרשמה:</h1>
       <form action="" onSubmit={handleSubmit(ValidateForm)}>
 
       <div className="form-group">
         <label htmlFor="username">שם משתמש:</label>
-      <input type="text" name="username" id="username" maxLength={60} {...register("username",{required:"שדה חובה",
+      <input type="text" name="username" id="username" maxLength={60}  {...register("username",{required:"שדה חובה",
     validate:CheckUsernameValidity})}/> 
       {/* #####  added maxLenght to prevent the user from entering more than 60 chars ##### */}
       <p className='form-input-error'>{errors.username?.message}</p>
@@ -90,9 +89,9 @@ return (
       </div>
 
 
-      <div className="form-group">
-        <label htmlFor="image">תמונה:</label>
-      <input type="file" name="image" id="image"  accept='image/jpeg, image/jpg' {...register("image",{
+      <div className="form-group img-input">
+        <label htmlFor="image"><AiFillFileImage className='img-icon'/> תמונה</label>
+        <input type="file" name="image" id="image"  accept='image/jpeg, image/jpg' {...register("image",{
         required:"שדה חובה"
         })}/>
       <p className='form-input-error'>{errors.image?.message}</p>
