@@ -3,6 +3,7 @@ import { UserContext } from '../contexts/UserContext'
 import { useParams,useNavigate } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import {AiFillFileImage} from 'react-icons/ai'
+import { Link } from 'react-router-dom';
 
 export default function Register() {
 
@@ -183,6 +184,7 @@ return (
       <button>הרשם</button>
 
     </form>
+    <p>כבר רשום? <Link className='form-link link' to='/register'>התחבר</Link></p>
     </div>
 
 

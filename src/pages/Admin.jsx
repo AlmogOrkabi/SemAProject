@@ -21,7 +21,7 @@ export default function Admin() {
 
   return (
     <>
-      <h1>Admin Page</h1>
+      <h1 className='title'>דף ניהול</h1>
       {
         // render all users except the admin: 
         users.map((u) => u.username != 'admin'?

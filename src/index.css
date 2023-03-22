@@ -1,6 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Fredoka&display=swap');
 
+@import './styles/desktop.css';
 
 
 *,
@@ -161,7 +162,7 @@ gap: 0.8em;
   background-color: rgba(255, 255, 255, 0.527);
   align-items: center;
   min-width: fit-content;
-  /* padding-block: 5%; */
+  padding-block: 1em;
 }
 
 .form-container input{
@@ -174,13 +175,14 @@ gap: 0.8em;
 
 .form-container button,
 .form-group{
-  width: fit-content;
+  min-width: fit-content;
   font-size: 0.9rem;
   color: rgb(114, 114, 114);
   margin-inline: auto;
   display: flex;
   flex-direction: column;
   padding-inline: 3%;
+  margin-block: 1em;
 }
 input:focus{
   outline-color: rgba(0, 26, 255, 0.712);
@@ -199,6 +201,10 @@ input:focus{
 .img-input{
   margin: 0;
   cursor: pointer;
+}
+
+form{
+  width:80%;
 }
 
 /*_____PROFILE PAGE________*/
@@ -278,3 +284,13 @@ input:focus{
 .profile-container p {
   padding-block: 5px;
 }
+
+
+/*___________________________*/
+/*___________________________*/
+/*___________________________*/
+/*___________________________*/
+/*___________________________*/
+/*___________________________*/
+/*___________________________*/
+
