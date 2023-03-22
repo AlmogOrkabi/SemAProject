@@ -127,3 +127,48 @@ input:focus{
   color: red;
   font-size: 0.65rem;
 }
+
+/*_____PROFILE PAGE________*/
+
+
+.profile-title{
+  text-align: center;
+  padding-top: 10%;
+  text-shadow: 0px 3px 9px #696969;
+}
+
+img#pro-img {
+  max-width: 100px;
+  border-radius: 50%;
+  box-shadow: 0 5px 10px dimgrey;
+  min-width: 30%;
+}
+div#box-pro1 {
+  display: flex;
+  padding: 20px;
+  border: 1px black solid;
+  margin-inline: 20%;
+  margin-block: 5%;
+  box-shadow: 10px 10px 10px 10dimgrey;
+ }
+ div#box-outline {
+  padding: 20px;
+}
+button#logoff {
+  padding: 2px;
+  color: white;
+  background-color: red;
+  font-family: cursive;
+}
+button#edit {
+  padding: 2px;
+  color: white;
+  background-color: rgb(128, 128, 128);
+  font-family: cursive;
+}
+p#pro-name {
+  font-size: 20px;
+}
+.profile-container p {
+  padding: 2px;
+}
