@@ -1,27 +1,16 @@
 @media screen and (min-width: 768px) {
 
     form{
-        align-self: end;
+        width: 60%;
     }
-  /* .form-container{
-    max-width: 70%;
-  }
-
-
 
     .form-group{
-        display: flex;
-        flex-direction: row;
-        max-width: 100%;
-        align-items: center;
-        text-align: right;
+      margin-block: 1.5em;
     }
 
-    .form-group input{
-      max-width: 80%;
-    }
+    
 
-    form{
-      width: 80%;
-    } */
+  .form-container{
+    max-width: 40%;
+  }
 }

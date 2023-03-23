@@ -21,76 +21,6 @@ const {users,Login,CheckUsernameValidity,CheckPasswordValidity,loggedUser,SetLog
 
 
 
-
-//   const CheckHebrewLetters = (ch) => {
-//   return ch >= 'א'&& ch <= 'ת'
-//   }
-
-//   const  checkLetters = (ch) => {
-
-//     return ch >= 'a' && ch <= 'z';
-//   }
-
-//   const checkCapitalLetters = (ch) => {
-
-//     return ch >= 'A' && ch <= 'Z';
-//   }
-
-//   const checkNumbers = (ch) => {
-//     return ch >= '0' && ch <= '9';
-//   }
-
-//   const checkSymbols = (ch) => {
-//     //[!@#$%^&*+`~'=?\|\]\[\(\)\-<>/]
-//     return ch == '!' || ch == '@' || ch == '$' || ch == '#' || ch == '%' || ch == '+' || ch == '-' || ch == '^' || ch == '&' || ch == '*' || ch == '`' || ch == '~' || ch == '=' || ch == '<' || ch == '>' || ch  == '/' || ch == '(\)' || ch == '_' || ch == '|' || ch == '.' || ch == "'";
-//   }
-
-
-
-
-//   function CheckUserNameInput(target){
-//     for(let i = 0; i <target.value.length; i++){
-//       if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && checkNumbers(target.value[i]) == false && checkSymbols(target.value[i]) == false){
-//         target.value = target.value.slice(0,i);
-//         target.classList.add('border-red');
-//       }
-//       else{
-//         target.classList.remove('border-red');
-//       }
-
-//   }
-
-//   if(target.value.length <= 0 || target.value.length > 60){
-//     //add an error message to the user for invalid input length
-//     return false
-//   }
-//   else{
-//     return true; //all chars not allowed have been deleted and the username length is valid
-//   }
-// }
-
-
-
-
-
-// //deletes unapproved chars
-// function CheckPasswordChars(target){
-//     for(let i = 0; i <target.value.length; i++){
-//     if(checkLetters(target.value[i]) == false && checkCapitalLetters(target.value[i]) == false && checkNumbers(target.value[i]) == false && checkSymbols(target.value[i]) == false){
-//       target.value = target.value.slice(0,i);
-//       target.classList.add('border-red');
-//     }
-//     else{
-//       target.classList.remove('border-red');
-
-//     } 
-  
-//   }
-// }
-
-
-
-
   const UserLogin = (data) => {
   let user = Login(data.username,data.password);
   if (user != undefined){
@@ -100,8 +30,6 @@ const {users,Login,CheckUsernameValidity,CheckPasswordValidity,loggedUser,SetLog
       navigation(`/admin`) 
     }
     else{
-    //delete before submitting
-    alert(`Welcome Back ${user.username}`);
     navigation(`/profile/${user.username}`) }
 
     //idea for the admin vs normal user login:
@@ -140,7 +68,7 @@ const {users,Login,CheckUsernameValidity,CheckPasswordValidity,loggedUser,SetLog
       <input type="password" name="password" id="password" maxLength={12} onKeyUp={() => trigger("repassword")} {...register("password",{required:"שדה חובה"})}/>
       <p className='form-input-error'>{errors.password?.message}</p>
       </div>
-        <button>התחבר/י</button>
+        <button className='form-btn'>התחבר/י</button>
     </form>
 <p>עדיין לא משתמש רשום? <Link className='form-link link' to='/register'>הרשם עכשיו!</Link></p>
 </div>

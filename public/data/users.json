@@ -14,5 +14,31 @@
         "city": "תל אביב ",
         "street": "עין הקורא",
         "streetNumber": 10
+    },
+    {
+        "username": "StarfishFTW",
+        "password": "Ss1234!!",
+        "image": "https://www.looper.com/img/gallery/the-patrick-star-show-release-date-cast-and-plot/intro-1622509030.jpg",
+        "firstname": "פטריק",
+        "lastname": "סטאר",
+        "email": "PatrickStar2009@gmail.com",
+        "birthdate": "1999/05/01",
+        "city": "אחיסמך",
+        "street": "הבננה",
+        "streetNumber": 19
+    },
+
+    {
+        "username": "NotAKetchup",
+        "password": "Pp1234!!",
+        "image": "https://i1.sndcdn.com/artworks-SqPLYJO0MWdRlxIz-EnTThQ-t500x500.jpg",
+        "firstname": "היינץ",
+        "lastname": "דופנשמירץ",
+        "email": "Doofy123@yahoo.com",
+        "birthdate": "1967/01/03",
+        "city": "בני ברק",
+        "street": "ארלוזרוב",
+        "streetNumber": 25
     }
+
 ]

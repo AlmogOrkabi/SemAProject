@@ -121,11 +121,11 @@ return (
 
 
       <div className="form-group">
-        <label htmlFor="new-email">כתובת מייל:</label>
-        <input type="text" name="email" id="new-email" {...register("newemail",{required:"שדה חובה",
+        <label htmlFor="email">כתובת מייל:</label>
+        <input type="text" name="email" id="email" {...register("email",{required:"שדה חובה",
         validate:{CheckEmailValidity,FindUserByEmail}
         })}/>
-      <p className='form-input-error'>{errors.newemail?.message}</p>
+      <p className='form-input-error'>{errors.email?.message}</p>
       </div>
 
 
@@ -181,7 +181,7 @@ return (
 
 
 
-      <button>הרשם</button>
+      <button  className='form-btn'>הרשם</button>
 
     </form>
     <p>כבר רשום? <Link className='form-link link' to='/register'>התחבר</Link></p>

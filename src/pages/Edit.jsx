@@ -74,7 +74,7 @@ function CheckPasswordsMatch(value){
 
   return (
     <>
-    <h1>עריכת פרופיל: {user.username}</h1>
+    <h1 className='title'>עריכת פרופיל: {user.username}</h1>
 
     <div className='form-container'>
 
@@ -137,11 +137,11 @@ function CheckPasswordsMatch(value){
 
 
       <div className="form-group">
-        <label htmlFor="new-email">כתובת מייל חדשה:</label>
-        <input type="text" name="email" id="new-email" {...register("newemail",{required:"שדה חובה",
+        <label htmlFor="email">כתובת מייל חדשה:</label>
+        <input type="text" name="email" id="email" {...register("email",{required:"שדה חובה",
         validate:CheckEmailValidity
         })}/>
-      <p className='form-input-error'>{errors.newemail?.message}</p>
+      <p className='form-input-error'>{errors.email?.message}</p>
       </div>
 
 
@@ -197,64 +197,10 @@ function CheckPasswordsMatch(value){
 
 
 
-      <button>שמור שינויים</button>
+      <button  className='form-btn'>שמור שינויים</button>
 
     </form>
     </div>
-
-  {/*  <form action="" onSubmit={(e) => CheckFormOnSubmition(e)} className='form register-form flex-column'>
-
-        <label htmlFor="register-username">שם משתמש:</label>
-        <input type="text" id='register-username' name='username' ref={usernameRef} required   maxLength={60}  onKeyUp={(event) => CheckUserNameInput(event.target)} />
-
-
-
-        <label htmlFor="register-password">סיסמה:</label>
-
-        <input type="password" name="password" id="register-password" ref={passwordRef} title='בין 7 ל 12 תווים, לפחות אות גדולה אחת, תו מיוחד ומספר' minLength={7} maxLength={12} onKeyUp={(e) => CheckPasswordChars(e.target)}   onBlur={(e) => CheckPasswordValidity(e.target,rePasswordRef.current)} required />
-
-        <label htmlFor="register-password-confirmation">אימות סיסמה:</label>
-        <input type="password" name="password" id="register-password-confirmation" ref={rePasswordRef} title='בין 7 ל 12 תווים, לפחות אות גדולה אחת, תו מיוחד ומספר' minLength={7} maxLength={12} onKeyUp={(e) => CheckPasswordChars(e.target)} onBlur = {(e) => CheckRePassword(e.target,passwordRef.current)} required />
-
-
-        <label htmlFor="register-image">תמונה:</label>
-        <input type="file" name="user-image" id="register-image" accept='image/jpeg, image/jpg' ref={imageRef} onChange={(e) => SetImage(URL.createObjectURL(e.target.files[0]))} required />
-
-
-        <label htmlFor="first-name">שם פרטי:</label>
-        <input type="text" name="first-name" id="first-name" ref={firstnameRef} onKeyUp={(e) => CheckNameChars(e.target)} required />
-
-        <label htmlFor="last-name">שם משפחה:</label>
-        <input type="text" name="last-name" id="last-name" ref={lastnameRef} onKeyUp={(e) => CheckNameChars(e.target)} required />
-
-
-
-        <label htmlFor="register-email">כתובת דוא"ל:</label>
-        <input type="email" name="user_email" id="register-email" ref={emailRef} pattern='.+@[a-z]+\.com'  onKeyUp={(e) => CheckEmailChars(e.target)} onBlur={(e) => CheckEmailValidity(e.target)} required />
-
-        <label htmlFor="register-birth-date">תאריך לידה:</label>
-        <input type="date" name="birth-date" id="register-birth-date" ref={bdateRef} min="1923-01-01" max="2023-01-01"  onBlur={(e) => CalcAge(e.target)} required />
-
-
-        <label htmlFor="register-city">עיר מגורים:</label>
-        <input type="text" name="city" id="register-city" ref={cityRef} list='city-list' required/>
-        <datalist id='city-list'>
-          {
-            cities.map((city) => <option key = {city.שם_ישוב} value={city.שם_ישוב}></option>)
-          }
-        </datalist>
-
-          <label htmlFor="register-street">רחוב:</label>
-          <input type="text" name="user-street" id="register-street" ref={streetRef}  onKeyUp={(event) => CheckInputLanguage(event.target)} required />
-
-          <label htmlFor="register-street-number">מספר בית:</label>
-          <input type="number" id="register-street-number" name="user-street-number" ref={streetNumrRef} min={1} onChange={(e) => CheckStreetNumber(e.target)} required/>
-
-        <button type='sumbit'>שמור שינויים</button>
-
-        </form> */}
-
-
     </>
   )
 }
