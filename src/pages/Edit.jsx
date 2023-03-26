@@ -139,6 +139,10 @@ function CheckPasswordsMatch(value){
       <div className="form-group">
         <label htmlFor="email">כתובת מייל חדשה:</label>
         <input type="text" name="email" id="email" {...register("email",{required:"שדה חובה",
+        pattern:{
+          value :/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i, // checks that the pattern matches a standard email address
+          message: "תבנית לא תקינה"
+        },
         validate:CheckEmailValidity
         })}/>
       <p className='form-input-error'>{errors.email?.message}</p>
