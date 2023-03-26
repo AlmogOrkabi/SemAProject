@@ -10,7 +10,7 @@ export default function Admin() {
   const navigation = useNavigate();
 
   useEffect(() => {
-    //if the user logged in (or no user logged in) is NOT the admin, kicks them to the login page
+    //if the user logged in is NOT the admin (or no user is currently logged in), kicks them to the login page
     if(loggedUser.username != 'admin'){
       alert('UNAUTHORIZED ACCESS');
       navigation('/login')

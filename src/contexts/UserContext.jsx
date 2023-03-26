@@ -3,7 +3,7 @@ import {createContext,useState,useEffect } from "react";
 export const UserContext = createContext();
 
 
-// user:
+// user template:
 
     //  {
     //      "id": "",
@@ -293,7 +293,7 @@ const [cities,SetCities] = useState([]);
 async function LoadCities(){
   try {
     let res = await fetch(`https://data.gov.il/api/3/action/datastore_search?resource_id=5c78e9fa-c2e2-4771-93ff-7f400a12f7ba&limit=1567`);
-    // without limit will only get the first 100 cities (out of 1267)
+    // without limit will only get the first 100 cities (out of 1267), gave extra space for another 200 cities(number of actual cities unlikely to surpass that amount)
     let data = await res.json();
     console.log(data)
     data = data.result.records
@@ -321,7 +321,7 @@ const CheckHebrew = (value) =>{
 
 //checks special characters
 const CheckSpecialChar = (value) =>{
-  //  \p{L} ---> any unicode letter
+  //  \p{L} ---> any unicode letter in any language
   //  \p{N} ---> any unicode digit
   //  +/u --> flags the end of the regular expression and indicates it's to be treated as a unicode regular expression
   
@@ -367,7 +367,7 @@ function CheckPasswordValidity(value){
   }
 }
 
-// does not work globally because of the "watch" method
+// does not work globally because of the "watch" method,useRef hook does not work as well, moved a copy to the register and edit pages:
 // function CheckPasswordsMatch(value,password){
 //   if(value != password){
 //     return "סיסמאות לא תואמות"

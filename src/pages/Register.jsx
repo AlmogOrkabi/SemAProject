@@ -28,7 +28,7 @@ export default function Register() {
         navigation(`/login`)
     }
 
-// does not work globally because of the "watch" method
+// does not work globally because of the "watch" method, the useRef hook didnt work as well.
 function CheckPasswordsMatch(value){
   if(value != watch("password")){
     return "סיסמאות לא תואמות"

@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Fredoka&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&display=swap'); /*<the 'Fredoka' font>*/
 
 /*doesnt work, 90% gets deprecated:*/
 /* @import './styles/desktop.css'; */
@@ -43,8 +43,8 @@ font-size: clamp(0.6rem,2vw,1.3rem)
 
 
 /*
-the default look of the input looks weird on mobile and we found no other way to change it,
-the functionality of the input stays the same
+the default look of the file input looks weird on mobile and we found no other way to change it,
+the functionality of the input stays the same:
 */
 input[type="file"]{
   display: none;

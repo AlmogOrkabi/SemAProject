@@ -32,17 +32,10 @@ const {users,Login,CheckUsernameValidity,CheckPasswordValidity,loggedUser,SetLog
     else{
     navigation(`/profile/${user.username}`) }
 
-    //idea for the admin vs normal user login:
-    /*
-    adding a boolean: Admin == true / false
-    OR
-    saving the admins in a different array and checking the admin's array first(it is supposed to be shorter than the normal users array)
-    */
 
   }
   else{
     alert('User Not Found');
-    //??add a popup or something to go to the register page??
   }
 }
   
@@ -66,6 +59,7 @@ const {users,Login,CheckUsernameValidity,CheckPasswordValidity,loggedUser,SetLog
       <div className="form-group">
         <label htmlFor="password">סיסמה:</label>
       <input type="password" name="password" id="password" maxLength={12} onKeyUp={() => trigger("repassword")} {...register("password",{required:"שדה חובה"})}/>
+      {/* removed the password validity check because of the admin password + the admin password was longer than 12 characters so we changed it to 'admin1234' */}
       <p className='form-input-error'>{errors.password?.message}</p>
       </div>
         <button className='form-btn'>התחבר/י</button>
