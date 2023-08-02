@@ -7,6 +7,7 @@ specifiers:
   moment: ^2.29.4
   react: ^18.2.0
   react-dom: ^18.2.0
+  react-hook-form: ^7.43.8
   react-icons: ^4.8.0
   react-router-dom: ^6.8.2
   vite: ^4.1.0
@@ -15,6 +16,7 @@ dependencies:
   moment: 2.29.4
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-hook-form: 7.43.8_react@18.2.0
   react-icons: 4.8.0_react@18.2.0
   react-router-dom: 6.8.2_biqbaboplfbrettd7655fr4n2y
 
@@ -756,6 +758,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hook-form/7.43.8_react@18.2.0:
+    resolution: {integrity: sha512-BQm+Ge5KjTk1EchDBRhdP8Pkb7MArO2jFF+UWYr3rtvh6197khi22uloLqlWeuY02ItlCzPunPsFt1/q9wQKnw==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-icons/4.8.0_react@18.2.0:

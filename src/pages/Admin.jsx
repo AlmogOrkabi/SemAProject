@@ -26,6 +26,9 @@ export default function Admin() {
         // render all users except the admin: 
         users.map((u) => u.username != 'admin'?
         <User key = {u.username} user = {u}/> : null)
+        // users
+        //  .filter(({ username }) => username !== 'admin')
+        //  .map(user => <User key = {u.username} user = {u}/>)
       }
       
     </>
